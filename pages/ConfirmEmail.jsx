@@ -3,6 +3,7 @@ import {
   getAuth,
   applyActionCode,
   sendEmailVerification,
+  deleteUser,
   onAuthStateChanged,
 } from "firebase/auth";
 import { useRouter } from "next/router";
@@ -76,9 +77,27 @@ export default function ConfirmEmail() {
     }
   };
 
+  const handleDeleteAccount = async () => {
+    try {
+      await deleteUser(auth.currentUser);
+      console.log("Потребителят е изтрит успешно");
+      setError("Потребителят е изтрит успешно.");
+      router.push("/");
+    } catch (error) {
+      console.error("Грешка при изтриване на потребителя:", error);
+      setError("Грешка при изтриване на потребителя. Моля, опитайте отново.");
+    }
+  };
+
   if (loading) {
     return <p>Зарежда се...</p>;
   }
 
-  return <div className="container">{error && <p>{error}</p>}</div>;
+  return (
+    <div className="container">
+      {error && <p>{error}</p>}
+      <p>Объркали сте вашият имейл? Изтриете го.</p>
+      <button onClick={handleDeleteAccount}>Изтрий акаунта</button>
+    </div>
+  );
 }

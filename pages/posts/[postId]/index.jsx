@@ -89,13 +89,24 @@ export default function PostDetails({ post }) {
       setUser(user);
     });
 
+    // Fetch comments initially
     fetchComments(numCommentsToFetch);
+
+    // Check liked status and fetch like count
     checkLikedStatus();
     fetchLikeCount();
 
+    // Set up interval to refresh comments every 10 seconds
+    const intervalId = setInterval(() => {
+      fetchComments(numCommentsToFetch);
+    }, 60000); // 10 seconds
+
+    // Clean up the interval on component unmount
     return () => {
-      unsubscribe();
+      clearInterval(intervalId);
     };
+
+    // Dependency array includes the necessary dependencies
   }, [post, numCommentsToFetch]);
 
   const fetchLikeCount = async () => {
