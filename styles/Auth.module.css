@@ -1,0 +1,136 @@
+.SignInForm {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.SignInTextBox {
+  width: 230px;
+  height: 35px;
+  background-color: transparent;
+  color: #eef0f1;
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid #eef0f1; /* Add an underline effect */
+}
+
+.labelActive {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #eef0f1;
+  font-size: 12px;
+  pointer-events: none; /* Make sure the label doesn't interfere with input */
+  transition: 0.3s ease all; /* Add a smooth transition effect */
+}
+
+.label {
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  transition: top 0.3s, font-size 0.3s;
+  color: #eef0f1;
+}
+
+.LogInForm {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.form {
+  display: grid;
+  gap: 5%;
+  place-items: center;
+}
+
+.SignUpHead {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 2rem;
+  font-size: 2.4rem;
+  width: fit-content;
+  background-color: #23359c;
+}
+
+.SignInTextBox {
+  width: 230px;
+  height: 35px;
+  background-color: transparent;
+  color: #eef0f1;
+  text-align: center;
+}
+
+.LoginTextBox {
+  width: 230px;
+  height: 35px;
+  background-color: transparent;
+  color: #eef0f1;
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid #eef0f1;
+}
+
+.SignInBtn {
+  margin-top: 20px;
+  width: 120px;
+  height: 40px;
+  background-color: #5900ff;
+  color: #eef0f1;
+  border: none;
+}
+
+.LogInBtn {
+  margin-top: 20px;
+  width: 120px;
+  height: 40px;
+  background-color: #5900ff;
+  color: #eef0f1;
+  border: none;
+}
+
+.socials {
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-evenly;
+  width: 200px;
+}
+
+.Google {
+  background-color: transparent;
+  border: none;
+}
+
+.Github {
+  background-color: transparent;
+  border: none;
+  height: 40px;
+}
+
+.loadingOverlay {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(
+    176deg,
+    rgb(18, 24, 27) 50%,
+    rgb(32, 39, 55) 100%
+  );
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: auto;
+}

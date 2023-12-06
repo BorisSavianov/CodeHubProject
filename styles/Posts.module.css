@@ -1,0 +1,374 @@
+.wraper {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  place-items: center;
+  text-align: center;
+  gap: 20px;
+  text-decoration: none;
+}
+
+.all {
+  text-align: center;
+}
+
+.imageWrapper {
+  width: 200px; /* Set the desired width for the image container */
+  height: 130px; /* Set the desired height for the image container */
+  overflow: hidden; /* Hide any overflow content */
+  margin: 0 auto;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+}
+
+.content {
+  background-color: #282d38;
+  padding: 10px 4px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.contentShort {
+  background-color: #282d38;
+  padding: 10px 4px;
+  border-radius: 10px;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  color: #eef0f1;
+  text-decoration: none;
+}
+
+.create {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 22px;
+  margin-bottom: 60px;
+}
+
+.createBtn {
+  background-color: #d43f3f;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 150px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  gap: 10px;
+}
+
+.PagBtn {
+  background-color: #d43f3f;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 120px;
+}
+
+.disabled {
+  background-color: #722424;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 120px;
+}
+
+.disabled:hover {
+  cursor: default;
+}
+
+/* POST */
+.title {
+  font-size: 40px;
+  padding: 1rem 2rem;
+  color: #0c080f;
+  width: fit-content;
+  background-color: #cf2828;
+  margin: 100px auto 40px auto;
+}
+
+.PostContent {
+  margin: 0 auto;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #eef0f1;
+  text-decoration: none;
+}
+
+.img {
+  width: clamp(200px, 100%, 450px);
+  display: flex;
+  margin: 0 auto;
+}
+
+.ImgContainer {
+  width: clamp(200px, 70%, 600px);
+  margin: 50px auto;
+}
+
+.LikesHead {
+  display: flex;
+  justify-content: center;
+}
+
+.LikesDiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.BtnDiv {
+  width: 60%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.CommentForm {
+  margin: 50px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.CommentsHeading {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 15px;
+  margin-top: 20%;
+  font-size: 2rem;
+}
+
+.Comments {
+  display: grid;
+  place-items: center;
+  grid-template-columns: auto;
+  gap: 75px;
+  margin-bottom: 100px;
+}
+
+.Comment {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  background-color: rgb(42 46 53);
+  box-shadow: 0 5px 20px rgb(0 0 0 / 30%);
+  max-width: 70%;
+}
+
+.line {
+  background-color: #6c7983;
+  border-radius: 9999px;
+  border: 1px solid #6c7983;
+  width: 150px;
+  margin: auto auto;
+  height: 3px;
+}
+
+.Liked {
+  background-color: rgb(73, 129, 0);
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 150px;
+}
+
+.NotLiked {
+  background-color: #be0707;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 150px;
+}
+
+.LikeCount {
+  font-size: 18px;
+}
+
+.deleteBtn {
+  padding: 5px 10px;
+  border-radius: 0;
+  border: 1px solid transparent;
+  background-color: #c3cfeb;
+  color: #282d38;
+  transition: background-color 0.3s ease-in-out;
+  font-size: 20px;
+}
+
+/* CommentForm */
+
+.CommentForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 150px;
+}
+
+.CommentForm p {
+  margin-bottom: 8px;
+}
+
+.CommentForm input {
+  padding: 8px;
+  margin-right: 8px;
+  width: 40%;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.CommentForm button {
+  padding: 8px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* New Post */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.formGroup {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fileInput {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+}
+
+.submitButton {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 150px;
+}
+
+.submitButton:hover {
+  background-color: #45a049;
+}
+
+.textarea,
+.input {
+  resize: none;
+  width: clamp(200px, 30%, 500px);
+  background-color: #1e1e1e;
+  border: none;
+  color: #dddddd;
+  width: clamp(200px, 50%, 600px);
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 8px;
+}
+
+.imagePreview {
+  max-width: 80%;
+}
+
+@media screen and (max-width: 500px) {
+  .Liked {
+    padding: 7px;
+    font-size: 14px;
+    width: 100px;
+  }
+
+  .NotLiked {
+    padding: 7px;
+    font-size: 14px;
+    width: 100px;
+  }
+  .LikeCount {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+}
+
+@media screen and (max-width: 850px) {
+  .wraper {
+    grid-template-columns: auto auto;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .wraper {
+    grid-template-columns: auto;
+  }
+
+  .CommentForm input {
+    padding: 8px;
+    margin-right: 8px;
+    width: 60%;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  .deleteBtn {
+    padding: 3px 6px;
+    border-radius: 0;
+    border: 1px solid transparent;
+    background-color: #c3cfeb;
+    color: #282d38;
+    transition: background-color 0.3s ease-in-out;
+    font-size: 16px;
+  }
+}

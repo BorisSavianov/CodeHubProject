@@ -1,0 +1,147 @@
+.heading {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.Langcontent {
+  text-decoration: none;
+  display: grid;
+  place-items: center;
+  margin-top: 20px;
+  height: 40vh;
+  width: 300px;
+  margin: 0 auto;
+
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.Langcontent::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.content {
+  text-decoration: none;
+  display: grid;
+  place-items: center;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.Item {
+  display: block;
+  text-decoration: none;
+  color: #eef0f1;
+  background-color: #282d38;
+  padding: 20px 8px;
+  border-radius: 10px;
+  width: 200px;
+  text-align: center;
+}
+
+.marginB {
+  margin-bottom: 50vh;
+}
+
+.varHeading {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.varText {
+  text-align: center;
+  margin: 0 20px;
+  margin-bottom: 20px;
+}
+
+.varContent {
+  margin-top: 20px;
+  display: grid;
+  place-items: center;
+  gap: 50px;
+  width: 100%;
+}
+
+.varCode {
+  background-color: #1e1e1e;
+  width: fit-content;
+  padding: 10px;
+  min-width: 100px;
+}
+
+.codeText {
+  font-size: 14px;
+  color: #cccccc;
+}
+
+.keyword {
+  color: #569cd6;
+}
+
+.number {
+  color: #b5cea8;
+}
+
+.string {
+  color: #ce9178;
+}
+
+.variable {
+  color: #9cdcfe;
+}
+
+.builtin {
+  color: #4ec9b0;
+}
+.comment {
+  color: #3dff47;
+}
+
+.quiz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50vh;
+  margin-top: -20vh;
+}
+
+.answer {
+  resize: none;
+  width: clamp(200px, 30%, 500px);
+  background-color: #1e1e1e;
+  border: none;
+  color: #dddddd;
+}
+
+.submitBtn {
+  padding: 13px 25px;
+  border-radius: 0;
+  border: 1px solid transparent;
+  background-color: #4c0083;
+  background-attachment: fixed;
+  transition: background-color 0.3s ease-in-out;
+  margin: 10px auto 0px auto;
+  display: flex;
+  font-size: 22px;
+  color: #dddddd;
+}
+
+.submitBtn:hover {
+  cursor: pointer;
+  background-color: #6700b1;
+}
+
+@media (max-width: 700px) {
+  .table {
+    width: 90vw;
+  }
+}

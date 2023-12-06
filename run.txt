@@ -1,0 +1,1 @@
+Run using: 'npm run dev' in the terminal and the open up localhost:3000

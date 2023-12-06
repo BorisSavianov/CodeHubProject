@@ -1,0 +1,94 @@
+.username {
+  margin-top: 30px;
+}
+
+.profilePic {
+  width: fit-content;
+  border-radius: 100%;
+}
+
+.details {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  place-items: center;
+}
+
+.title {
+  color: #eef0f1;
+  margin-bottom: 5px;
+}
+
+.post {
+  display: grid;
+  text-decoration: none;
+  place-items: center;
+  background-color: #282d38;
+  padding: 20px 30px;
+  border-radius: 10px;
+}
+
+.delBtn {
+  padding: 8px 15px;
+  border-radius: 0;
+  border: 1px solid transparent;
+  background-color: #c3cfeb;
+  color: #282d38;
+  transition: background-color 0.3s ease-in-out;
+  font-size: 20px;
+}
+
+.delBtn:hover {
+  background-color: #282d38;
+  color: #c3cfeb;
+  cursor: pointer;
+}
+
+.heading {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-wrapper {
+  display: grid;
+  width: fit-content;
+  margin: 50px auto;
+  grid-template-columns: auto auto auto;
+  place-items: center;
+}
+
+.btn {
+  width: 140px;
+  height: 60px;
+  padding: 10px 20px;
+  margin: 2px;
+  border-radius: 0;
+  border: 1px solid transparent;
+  background-color: #cf2828;
+  color: #eef0f1;
+  transition: background-color 0.3s ease-in-out;
+  font-size: 15px;
+}
+
+.btn:hover {
+  background-color: #8f1c1c;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .posts {
+    grid-template-columns: auto auto;
+  }
+}
+
+@media (min-width: 1500px) {
+  .posts {
+    grid-template-columns: auto auto auto auto;
+  }
+}
