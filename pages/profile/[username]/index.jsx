@@ -29,6 +29,7 @@ import {
 import styles from "../../../styles/Account.module.css";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
+import ToastComponent from "@/components/Toast";
 
 // Функция за изтриване на профила и документа с потребителското име на потребителя
 const deleteUserProfile = async (posts, user, router) => {
@@ -295,8 +296,14 @@ export default function UserProfile() {
       // Update state
       setXP((prevXP) => prevXP + 1);
 
+      // Get the updated XP value
+      const updatedXP = xp + 1;
+
       // Update Firestore
-      await updateDoc(doc(firestore, "users", user.uid), { xp: xp + 1 });
+      await updateDoc(doc(firestore, "users", user.uid), { xp: updatedXP });
+
+      // Show toast with the updated XP value
+      ToastComponent(`Имате ${updatedXP}xp`, "info");
     } catch (error) {
       console.error("Error updating user XP:", error);
     }
