@@ -24,7 +24,7 @@ The Self-Learning Programming Community Website is a hub for self-learners who a
 
 To get started with the Self-Learning Programming Community Website, follow these steps:
 
-1. Visit [code-hub-xi.vercel.app](https://code-hub-xi.vercel.app) in your web browser.
+1. Visit [code-hub-project.vercel.app](https://code-hub-project.vercel.app) in your web browser.
 2. Create an account or log in if you already have one.
 3. Explore the resource library to find tutorials and articles that match your learning interests.
 4. Participate in the community forum to connect with others and share your experiences.

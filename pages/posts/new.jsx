@@ -3,7 +3,7 @@ import { useState } from "react";
 import { collection, addDoc, db } from "../../lib/firebase";
 import useAuth from "../../hooks/useAuth";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import toast, { Toaster } from "react-hot-toast";
+import ToastComponent from "@/components/Toast";
 
 // Импортиране на CSS модула
 import styles from "../../styles/Posts.module.css";
@@ -37,7 +37,7 @@ export default function NewPostPage() {
     }
 
     if (errorMessage !== "") {
-      toast.error(errorMessage);
+      ToastComponent(errorMessage, "error");
       return;
     }
 
@@ -70,10 +70,10 @@ export default function NewPostPage() {
       setImage(null); // Нулиране на избраното изображение
       setImageUrlPreview(null);
 
-      toast.success("Постът е създаден успешно!");
+      ToastComponent("Постът е създаден успешно!", "success");
     } catch (error) {
       console.error("Грешка при създаване:", error);
-      toast.error("Грешка при създаване. Опитайте по-късно.");
+      ToastComponent("Грешка при създаване. Опитайте по-късно.", "error");
     }
   };
 
@@ -121,7 +121,6 @@ export default function NewPostPage() {
           Създай пост
         </button>
       </form>
-      <Toaster />
     </main>
   );
 }

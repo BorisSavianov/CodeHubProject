@@ -7,6 +7,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { useRouter } from "next/router";
+import ToastComponent from "@/components/Toast";
 
 export default function ConfirmEmail() {
   const [loading, setLoading] = useState(true);
@@ -50,6 +51,10 @@ export default function ConfirmEmail() {
       if (user && user.emailVerified) {
         setError(
           "Имейлът е успешно потвърден. Пренасочване към страницата за вход..."
+        );
+        ToastComponent(
+          "Имейлът е успешно потвърден. Пренасочване към страницата за вход...",
+          "info"
         );
         setTimeout(() => {
           router.push("/login");

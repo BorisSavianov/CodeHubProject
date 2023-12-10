@@ -26,8 +26,8 @@ import {
 
 import styles from "../../../styles/Posts.module.css";
 import Navbar from "@/components/Navbar";
-import toast from "react-hot-toast";
 import Link from "next/link";
+import ToastComponent from "@/components/Toast";
 
 export async function getStaticPaths() {
   const firestore = getFirestore();
@@ -132,7 +132,7 @@ export default function PostDetails({ post }) {
     const auth = getAuth();
 
     if (!auth.currentUser) {
-      toast.error("Трябва да сте регистрирани.");
+      ToastComponent("Трябва да сте регистрирани.", "error");
       return;
     }
 

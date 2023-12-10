@@ -6,7 +6,7 @@ import { firebaseConfig } from "../lib/firebase";
 import { getDoc, doc, collection, getFirestore } from "firebase/firestore";
 import { Analytics } from "@vercel/analytics/react";
 import "../styles/globals.css";
-import toast, { Toaster } from "react-hot-toast";
+import { ToastContainer, toast } from "react-toastify";
 import Metatags from "../components/Metatags";
 
 // Function to check if the user's email is verified
@@ -53,23 +53,18 @@ export default function MyApp({ Component, pageProps }) {
         if (!verified && router.pathname !== "/ConfirmEmail") {
           // If the user's email is not verified and they are not on the login, "/" or "/ConfirmEmail" page, redirect to login
           router.push("/ConfirmEmail");
-          toast.error("Потвърдете имейла си преди да влезете.");
+          toast.error("Потвърдете имейла си преди да влезете.", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
         }
       });
-    }
-
-    if (
-      !user &&
-      router.pathname !== "/login" &&
-      router.pathname !== "/" &&
-      router.pathname !== "/ConfirmEmail" &&
-      router.pathname == "/Languages/" &&
-      !router.pathname.startsWith("/Languages/")
-    ) {
-      // User is not signed in and not on the login page or the "/" page, redirect to login
-      router.push("/");
-      toast.error("Трябва да сте регистрирани");
-      return null;
     }
   }, [user, router]);
 
@@ -80,7 +75,18 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Toaster />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <link rel="icon" href="/CodeHub-logo.png" />
       <Component {...pageProps} user={user} username={username} />
       <Analytics />

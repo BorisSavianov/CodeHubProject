@@ -25,6 +25,7 @@ import { getAuth } from "firebase/auth";
 import { useRef } from "react";
 
 import styles from "../styles/Auth.module.css";
+import ToastComponent from "@/components/Toast";
 
 const auth = getAuth();
 const db = getFirestore();
@@ -99,11 +100,14 @@ function LoginForm() {
       setLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
       console.log("Login successful");
+
       setError("");
     } catch (error) {
       setError(error.message);
     } finally {
       setLoading(false);
+      ToastComponent("Успешно вписване", "success");
+      router.push("/");
     }
   };
 
@@ -201,6 +205,8 @@ function LoginForm() {
       setError(error.message);
     } finally {
       setLoading(false);
+      ToastComponent("Успешно вписване", "success");
+      router.push("/");
     }
   };
 
@@ -227,6 +233,8 @@ function LoginForm() {
       setError(error.message);
     } finally {
       setLoading(false);
+      ToastComponent("Успешно вписване", "success");
+      router.push("/");
     }
   };
 
@@ -440,15 +448,6 @@ function LoginForm() {
       </div>
     );
   }
-
-  return (
-    <div className="container">
-      <h2>Добре дошли, {username}</h2>
-      <button className={styles.SignInBtn} onClick={handleSignOut}>
-        Изход
-      </button>
-    </div>
-  );
 }
 
 export default LoginForm;
