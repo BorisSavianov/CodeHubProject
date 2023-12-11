@@ -93,6 +93,29 @@ function LoginForm() {
     return () => unsubscribe();
   }, []);
 
+  const handleFirebaseError = (errorCode) => {
+    switch (errorCode) {
+      case "auth/user-not-found":
+        return "Потребителят не е намерен.";
+      case "auth/wrong-password":
+        return "Невалидна парола.";
+      case "auth/invalid-login-credentials":
+        return "Невалидни данни за вход. Моля, проверете вашия имейл и парола.";
+      case "auth/invalid-email":
+        return "Невалиден email. Моля опитайте с друг.";
+      case "auth/missing-password":
+        return "Липсва парола.";
+      case "auth/email-already-in-use":
+        return "Този email вече е регистриран.";
+      case "auth/account-exists-with-different-credential":
+        return "Потребителят вече съществува, но с друг вход.";
+      case "auth/user-cancelled":
+        return "Потребителят отказа.";
+      default:
+        return "Грешка. Моля, опитайте по-късно.";
+    }
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -102,12 +125,12 @@ function LoginForm() {
       console.log("Login successful");
 
       setError("");
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
       ToastComponent("Успешно вписване", "success");
       router.push("/");
+    } catch (error) {
+      setError(handleFirebaseError(error.code));
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -125,7 +148,104 @@ function LoginForm() {
       await sendEmailVerification(userCredential.user);
       router.push("/ConfirmEmail");
     } catch (error) {
-      setError(error.message);
+      setError(handleFirebaseError(error.code));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      setLoading(true);
+      const provider = new GoogleAuthProvider();
+      const userCredential = await signInWithPopup(auth, provider);
+      console.log("Google sign-in successful");
+      const isNewUser = userCredential.additionalUserInfo.isNewUser;
+      setUsername("");
+
+      if (isNewUser) {
+        const newPassword = prompt("Please enter a password:");
+        if (newPassword === null) {
+          return;
+        }
+
+        try {
+          setLoading(true);
+          await createUserWithEmailAndPassword(
+            auth,
+            userCredential.user.email,
+            newPassword
+          );
+          console.log("Signup successful with user-set password");
+          await sendEmailVerification(userCredential.user);
+          router.push("/ConfirmEmail");
+        } catch (error) {
+          setError(handleFirebaseError(error.code));
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        // Handle the case for returning users if necessary
+      }
+
+      setEmail("");
+      setPassword("");
+      setError("");
+
+      setLoading(false);
+      ToastComponent("Успешно вписване", "success");
+      router.push("/");
+    } catch (error) {
+      setError(handleFirebaseError(error.code));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGitHubSignIn = async () => {
+    try {
+      setLoading(true);
+      const provider = new GithubAuthProvider();
+      const userCredential = await signInWithPopup(auth, provider);
+      console.log("GitHub sign-in successful");
+
+      const isNewUser = userCredential.additionalUserInfo.isNewUser;
+      setUsername("");
+
+      if (isNewUser) {
+        const newPassword = prompt("Please enter a password:");
+        if (newPassword === null) {
+          return;
+        }
+
+        try {
+          setLoading(true);
+          await createUserWithEmailAndPassword(
+            auth,
+            userCredential.user.email,
+            newPassword
+          );
+          console.log("Signup successful with user-set password");
+          await sendEmailVerification(userCredential.user);
+          router.push("/ConfirmEmail");
+        } catch (error) {
+          setError(handleFirebaseError(error.code));
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        // Handle the case for returning users if necessary
+      }
+
+      setEmail("");
+      setPassword("");
+      setError("");
+
+      setLoading(false);
+      ToastComponent("Успешно вписване", "success");
+      router.push("/");
+    } catch (error) {
+      setError(handleFirebaseError(error.code));
     } finally {
       setLoading(false);
     }
@@ -161,89 +281,6 @@ function LoginForm() {
       setError(error.message);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleGoogleSignIn = async () => {
-    try {
-      setLoading(true);
-      const provider = new GoogleAuthProvider();
-      const userCredential = await signInWithPopup(auth, provider);
-      console.log("Google sign-in successful");
-      const isNewUser = userCredential.additionalUserInfo.isNewUser;
-      setUsername("");
-
-      if (isNewUser) {
-        const newPassword = prompt("Please enter a password:");
-        if (newPassword === null) {
-          return;
-        }
-
-        try {
-          setLoading(true);
-          await createUserWithEmailAndPassword(
-            auth,
-            userCredential.user.email,
-            newPassword
-          );
-          console.log("Signup successful with user-set password");
-          await sendEmailVerification(userCredential.user);
-          router.push("/ConfirmEmail");
-        } catch (error) {
-          setError(error.message);
-        } finally {
-          setLoading(false);
-        }
-      } else {
-        // Handle the case for returning users if necessary
-      }
-
-      setEmail("");
-      setPassword("");
-      setError("");
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-      ToastComponent("Успешно вписване", "success");
-      router.push("/");
-    }
-  };
-
-  const handleGitHubSignIn = async () => {
-    try {
-      setLoading(true);
-      const provider = new GithubAuthProvider();
-      const userCredential = await signInWithPopup(auth, provider);
-      console.log("GitHub sign-in successful");
-
-      const isNewUser = userCredential.additionalUserInfo.isNewUser;
-      setUsername("");
-
-      if (isNewUser) {
-        // Handle new user setup if needed
-      } else {
-        // Handle returning users if needed
-      }
-
-      setEmail("");
-      setPassword("");
-      setError("");
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-      ToastComponent("Успешно вписване", "success");
-      router.push("/");
-    }
-  };
-
-  const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-      console.log("Sign out successful");
-    } catch (error) {
-      setError(error.message);
     }
   };
 
