@@ -1,0 +1,38 @@
+.quiz {
+  display: grid;
+  place-items: center;
+  margin: 20px;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.question {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.options {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.quizQuestion {
+  display: grid;
+  place-items: center;
+}
+
+.checkAnswer {
+  background-color: #007c00;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}

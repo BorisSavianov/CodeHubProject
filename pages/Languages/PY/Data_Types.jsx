@@ -1,11 +1,60 @@
+import React, { useState } from "react";
 import styles from "../../../styles/Python.module.css";
+import quiz from "@/styles/Quiz.module.css";
 import Section from "../../../components/Section";
 import Navbar from "../../../components/Navbar";
+import QuizQuestion from "@/components/QuizQuestion";
+
+import ToastComponent from "@/components/Toast";
+
+const Quiz = () => {
+  const questions = [
+    {
+      question: "Какъв е основният тип данни в Python?",
+      options: ["str", "int", "float", "bool"],
+      answer: "str",
+    },
+    {
+      question: "От какъв тип е x = True",
+      options: ["list", "str", "int", "bool"],
+      answer: "bool",
+    },
+  ];
+
+  const handleAnswer = (questionIndex, selectedAnswer, correctAnswer) => {
+    if (!selectedAnswer) {
+      ToastComponent("Моля, изберете отговор преди да проверите.", "info");
+      return;
+    }
+
+    if (selectedAnswer === correctAnswer) {
+      ToastComponent("Отговорът е правилен!", "success");
+    } else {
+      ToastComponent("Отговорът е грешен.", "error");
+    }
+  };
+
+  return (
+    <div className={styles.quiz}>
+      {questions.map((question, index) => (
+        <QuizQuestion
+          key={index}
+          question={question.question}
+          options={question.options}
+          onAnswer={(selectedOption) =>
+            handleAnswer(index, selectedOption, question.answer)
+          }
+        />
+      ))}
+    </div>
+  );
+};
 
 export default function PythonDataTypes() {
   return (
     <main className="container">
       <Navbar></Navbar>
+
       <div className={`${styles.varContent} ${styles.marginB} `}>
         <Section
           header={"Вградени типове данни"}
@@ -120,6 +169,7 @@ export default function PythonDataTypes() {
           </table>
         </div>
       </div>
+      <Quiz />
     </main>
   );
 }
