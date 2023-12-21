@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/react";
 import "../styles/globals.css";
 import { ToastContainer, toast } from "react-toastify";
 import Metatags from "../components/Metatags";
+import { getMessaging, app, getToken } from "../lib/firebase";
 
 // Function to check if the user's email is verified
 const isEmailVerified = async (user) => {
@@ -41,35 +42,69 @@ export default function MyApp({ Component, pageProps }) {
           setUsername(userData.username);
         }
       }
+
+      // Check email verification status when the user changes
+      if (user) {
+        isEmailVerified(user).then((verified) => {
+          if (!verified && router.pathname !== "/ConfirmEmail") {
+            // If the user's email is not verified and they are not on the login, "/" or "/ConfirmEmail" page, redirect to login
+            router.push("/ConfirmEmail");
+            toast.error("Потвърдете имейла си преди да влезете.", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+          }
+        });
+      }
     });
 
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    // Check email verification status when the user changes
-    if (user) {
-      isEmailVerified(user).then((verified) => {
-        if (!verified && router.pathname !== "/ConfirmEmail") {
-          // If the user's email is not verified and they are not on the login, "/" or "/ConfirmEmail" page, redirect to login
-          router.push("/ConfirmEmail");
-          toast.error("Потвърдете имейла си преди да влезете.", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
+    // Request permission for notifications
+    function requestPermission() {
+      console.log("Requesting permission...");
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          console.log("Notification permission granted.");
+        } else if (permission === "denied") {
+          console.log("Notification permission denied.");
         }
       });
     }
-  }, [user, router]);
+
+    const messaging = getMessaging();
+
+    getToken(messaging, {
+      vapidKey:
+        "BEoVuLTvGp0yKpFciKMPZb71Js6UZSkxn64wv0MGDVHHRPutNFhO-f47AO2wlMTuq4g4LSqLj4iUbD4Gnr0Y-6g",
+    })
+      .then((currentToken) => {
+        if (currentToken) {
+          console.log("FCM Token:", currentToken);
+          // Send the token to your server and update the UI if necessary
+          // ...
+        } else {
+          console.log(
+            "No FCM token available. Request permission to generate one."
+          );
+        }
+      })
+      .catch((err) => {
+        console.error("Error retrieving FCM token:", err);
+      });
+
+    // Request permission on component mount
+    requestPermission();
+
+    // Clean up the subscription
+    return () => unsubscribe();
+  }, [router]);
 
   if (loading) {
-    // Show loading indicator while checking authentication state
     return <p>Loading...</p>;
   }
 
