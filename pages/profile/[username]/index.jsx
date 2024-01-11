@@ -288,7 +288,6 @@ export default function UserProfile() {
     return <p>Зареждане...</p>;
   }
 
-  // Example: Increment XP
   const handleIncrementXP = async () => {
     const firestore = getFirestore();
 

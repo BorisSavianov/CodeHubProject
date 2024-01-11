@@ -1,13 +1,58 @@
 import React, { useState } from "react";
 import styles from "../../../styles/Python.module.css";
-import quiz from "@/styles/Quiz.module.css";
 import Section from "../../../components/Section";
 import Navbar from "../../../components/Navbar";
 import QuizQuestion from "@/components/QuizQuestion";
-
+import { getFirestore, updateDoc, doc, getDoc } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import ToastComponent from "@/components/Toast";
+import { useEffect } from "react";
 
-const Quiz = () => {
+const Quiz = ({ user }) => {
+  const [xp, setXP] = useState(0);
+
+  useEffect(() => {
+    const fetchUserXP = async () => {
+      if (user) {
+        const firestore = getFirestore();
+        const userDocRef = doc(firestore, "users", user.uid);
+
+        try {
+          const userDoc = await getDoc(userDocRef);
+
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            setXP(userData.xp || 0);
+          }
+        } catch (error) {
+          console.error("Error fetching user XP:", error);
+        }
+      }
+    };
+
+    fetchUserXP();
+  }, [user]);
+
+  const handleIncrementXP = async () => {
+    const firestore = getFirestore();
+
+    try {
+      // Update state
+      setXP((prevXP) => prevXP + 1);
+
+      // Get the updated XP value
+      const updatedXP = xp + 1;
+
+      // Update Firestore with the correct user UID
+      await updateDoc(doc(firestore, "users", user.uid), { xp: updatedXP });
+
+      // Show toast with the updated XP value
+      ToastComponent(`Отговорът е правилен!\nИмате ${updatedXP}xp.`, "success");
+    } catch (error) {
+      console.error("Error updating user XP:", error);
+    }
+  };
+
   const questions = [
     {
       question: "Какъв е основният тип данни в Python?",
@@ -28,7 +73,12 @@ const Quiz = () => {
     }
 
     if (selectedAnswer === correctAnswer) {
-      ToastComponent("Отговорът е правилен!", "success");
+      try {
+        // Call the handleIncrementXP function to handle further logic (e.g., update in Firestore)
+        handleIncrementXP();
+      } catch (error) {
+        console.error("Error updating user XP:", error);
+      }
     } else {
       ToastComponent("Отговорът е грешен.", "error");
     }
@@ -51,6 +101,18 @@ const Quiz = () => {
 };
 
 export default function PythonDataTypes() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const auth = getAuth();
+
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, [user]);
+
   return (
     <main className="container">
       <Navbar></Navbar>
@@ -169,7 +231,7 @@ export default function PythonDataTypes() {
           </table>
         </div>
       </div>
-      <Quiz />
+      <Quiz user={user} />
     </main>
   );
 }

@@ -353,14 +353,10 @@ body {
               <h1>Create Account</h1>
               <div className={styles["social-icons"]}>
                 <a onClick={handleGoogleSignIn} className={styles.icon}>
-                  <i
-                    className={`${styles["fa-brands"]} ${styles["fa-github"]}`}
-                  ></i>
+                  <img src="google.png"></img>
                 </a>
                 <a onClick={handleGitHubSignIn} className={styles.icon}>
-                  <i
-                    className={`${styles["fa-brands"]} ${styles["fa-linkedin-in"]}`}
-                  ></i>
+                  <img src="github.png"></img>
                 </a>
               </div>
               <span>or use your email for registration</span>
@@ -389,14 +385,10 @@ body {
               <h1>Sign In</h1>
               <div className={styles["social-icons"]}>
                 <a onClick={handleGoogleSignIn} className={styles.icon}>
-                  <i
-                    className={`${styles["fa-brands"]} ${styles["fa-github"]}`}
-                  ></i>
+                  <img src="google.png"></img>
                 </a>
                 <a onClick={handleGitHubSignIn} className={styles.icon}>
-                  <i
-                    className={`${styles["fa-brands"]} ${styles["fa-linkedin-in"]}`}
-                  ></i>
+                  <img src="github.png"></img>
                 </a>
               </div>
               <span>or use your email password</span>
