@@ -59,57 +59,6 @@ export default function MyApp({ Component, pageProps }) {
           }
         });
       }
-
-      // Request permission for notifications
-      function requestPermission() {
-        console.log("Requesting permission...");
-        Notification.requestPermission().then((permission) => {
-          if (permission === "granted") {
-            console.log("Notification permission granted.");
-          } else if (permission === "denied") {
-            console.log("Notification permission denied.");
-          }
-        });
-      }
-
-      // Get FCM token after user is authenticated
-      if (user) {
-        getToken(messaging, {
-          vapidKey:
-            "BEoVuLTvGp0yKpFciKMPZb71Js6UZSkxn64wv0MGDVHHRPutNFhO-f47AO2wlMTuq4g4LSqLj4iUbD4Gnr0Y-6g",
-        })
-          .then((currentToken) => {
-            if (currentToken) {
-              console.log("FCM Token:", currentToken);
-              // Send the token to your server and update the UI if necessary
-              // ...
-            } else {
-              console.log("No FCM token available.");
-            }
-          })
-          .catch((err) => {
-            console.error("Error retrieving FCM token:", err);
-          });
-      }
-
-      // Request permission on component mount
-      requestPermission();
-    });
-
-    // Handle incoming FCM messages
-    onMessage(messaging, (payload) => {
-      console.log("Message received:", payload);
-      // Handle the message, e.g., show a notification
-      toast.info(payload.notification.title, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
     });
 
     // Clean up the subscription
