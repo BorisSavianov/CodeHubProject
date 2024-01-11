@@ -3,10 +3,68 @@ import axios from "axios";
 import styles from "../../../styles/Python.module.css";
 import Section from "../../../components/Section";
 import Navbar from "../../../components/Navbar";
+import { getFirestore, updateDoc, doc, getDoc } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import ToastComponent from "@/components/Toast";
+import { useEffect } from "react";
 
 export default function Home() {
   const [userAnswer, setUserAnswer] = useState("");
   const [result, setResult] = useState("");
+  const [user, setUser] = useState(null);
+  const [xp, setXP] = useState(0);
+
+  useEffect(() => {
+    const fetchUserXP = async () => {
+      if (user) {
+        const firestore = getFirestore();
+        const userDocRef = doc(firestore, "users", user.uid);
+
+        try {
+          const userDoc = await getDoc(userDocRef);
+
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            setXP(userData.xp || 0);
+          }
+        } catch (error) {
+          console.error("Error fetching user XP:", error);
+        }
+      }
+    };
+
+    fetchUserXP();
+  }, [user]);
+
+  const handleIncrementXP = async () => {
+    const firestore = getFirestore();
+
+    try {
+      // Update state
+      setXP((prevXP) => prevXP + 1);
+
+      // Get the updated XP value
+      const updatedXP = xp + 1;
+
+      // Update Firestore with the correct user UID
+      await updateDoc(doc(firestore, "users", user.uid), { xp: updatedXP });
+
+      // Show toast with the updated XP value
+      ToastComponent(`Отговорът е правилен!\nИмате ${updatedXP}xp.`, "success");
+    } catch (error) {
+      console.error("Error updating user XP:", error);
+    }
+  };
+
+  useEffect(() => {
+    const auth = getAuth();
+
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, [user]);
 
   const handleSubmit = async () => {
     try {
@@ -15,6 +73,10 @@ export default function Home() {
       const response = await axios.post("/api/check", {
         answer: sanitizedAnswer,
       });
+      if (response.data.message === "Правилен отговор!") {
+        // Increment XP when the answer is correct
+        handleIncrementXP();
+      }
       setResult(response.data.message);
     } catch (error) {
       console.error(error);
@@ -312,7 +374,10 @@ export default function Home() {
       </div>
       <aside className={styles.quiz}>
         <h1>Задача</h1>
-        <p>Направи Python код който извежда числата от 1 до 5 използвайки for loop:</p>
+        <p>
+          Направи Python код който извежда числата от 1 до 5 използвайки for
+          loop:
+        </p>
         <textarea
           className={styles.answer}
           value={userAnswer}
