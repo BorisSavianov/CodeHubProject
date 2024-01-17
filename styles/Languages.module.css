@@ -79,7 +79,7 @@
   align-items: center;
   display: flex;
   height: 140px;
-  width: fit-content;
+  width: max-content;
   justify-content: center;
   overflow: hidden;
 }
