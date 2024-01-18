@@ -23,6 +23,11 @@ export default function Metatags({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
+
+      <meta
+        name="google-site-verification"
+        content="mONsFBpIM2RK6Lf0ndYkhGK1F3pG0y6sSs4bYSqmjaE"
+      />
     </Head>
   );
 }
