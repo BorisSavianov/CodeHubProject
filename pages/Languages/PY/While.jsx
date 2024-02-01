@@ -1,10 +1,113 @@
+import React, { useState } from "react";
+import axios from "axios";
 import styles from "../../../styles/Python.module.css";
 import Section from "../../../components/Section";
 import Navbar from "../../../components/Navbar";
+import { getFirestore, updateDoc, doc, getDoc } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import ToastComponent from "@/components/Toast";
+import { useEffect } from "react";
 
 export default function PythonWhileLoop() {
+  const [userAnswer, setUserAnswer] = useState("");
+  const [result, setResult] = useState("");
+  const [user, setUser] = useState(null);
+  const [xp, setXP] = useState(0);
+
+  useEffect(() => {
+    const fetchUserXP = async () => {
+      if (user) {
+        const firestore = getFirestore();
+        const userDocRef = doc(firestore, "users", user.uid);
+
+        try {
+          const userDoc = await getDoc(userDocRef);
+
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            setXP(userData.xp || 0);
+          }
+        } catch (error) {
+          console.error("Error fetching user XP:", error);
+        }
+      }
+    };
+
+    fetchUserXP();
+  }, [user]);
+
+  const handleIncrementXP = async (exerciseId) => {
+    const firestore = getFirestore();
+
+    try {
+      // Check if the user has already received XP for the current exercise
+      const userDocRef = doc(firestore, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+
+        // Check if the user has received XP for the current exercise
+        if (!userData.exercises || !userData.exercises.includes(exerciseId)) {
+          // Update state
+          setXP((prevXP) => prevXP + 1);
+
+          // Get the updated XP value
+          const updatedXP = xp + 1;
+
+          // Update Firestore with the correct user UID and mark exercise as completed
+          await updateDoc(doc(firestore, "users", user.uid), {
+            xp: updatedXP,
+            exercises: [...(userData.exercises || []), exerciseId],
+          });
+
+          // Show toast with the updated XP value
+          ToastComponent(
+            `Отговорът е правилен!\nИмате ${updatedXP}xp.`,
+            "success"
+          );
+        } else {
+          // User has already received XP for this exercise
+          ToastComponent("Отговорът е правилен!", "success");
+        }
+      }
+    } catch (error) {
+      console.error("Error updating user XP:", error);
+    }
+  };
+
+  useEffect(() => {
+    const auth = getAuth();
+
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, [user]);
+
+  const handleSubmit = async () => {
+    try {
+      // Include exerciseId in the API request
+      const exerciseId = 2; // Add exerciseId here
+      const response = await axios.post("/api/check", {
+        exerciseId,
+        answer: userAnswer,
+      });
+
+      if (response.data.message === "Правилен отговор!") {
+        // Increment XP when the answer is correct
+        handleIncrementXP(exerciseId);
+      }
+      setResult(response.data.message);
+    } catch (error) {
+      console.error(error);
+      setResult(`Error: ${error.message}`);
+    }
+  };
+
   return (
-    <main className="container">
+    <main>
       <Navbar></Navbar>
       <div className={`${styles.varContent}`}>
         <Section
@@ -131,6 +234,27 @@ export default function PythonWhileLoop() {
           </pre>
         </div>
       </div>
+      <aside className={styles.quiz}>
+        <h1>Задача</h1>
+        <p>
+          Направи Python код който извежда числата от 1 до 3 използвайки while
+          loop:
+        </p>
+        <textarea
+          className={styles.answer}
+          value={userAnswer}
+          onChange={(e) => setUserAnswer(e.target.value)}
+          placeholder="Въведи кода тук (максимум 100 символа)"
+          rows={5}
+          cols={5}
+          maxLength={100}
+        />
+
+        <button className={styles.submitBtn} onClick={handleSubmit}>
+          Предай
+        </button>
+        {result && <p>{result}</p>}
+      </aside>
     </main>
   );
 }

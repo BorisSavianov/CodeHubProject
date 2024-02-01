@@ -78,7 +78,7 @@ export default function NewPostPage() {
   };
 
   return (
-    <main className="container">
+    <main>
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1>Направи нов пост</h1>
         <div className={styles.formGroup}>

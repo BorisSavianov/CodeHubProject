@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 
 export default function Wellcome() {
   return (
-    <main className="container">
+    <main>
       <Navbar />
       <div className={styles.heading}>
         <h1>Научи Python</h1>

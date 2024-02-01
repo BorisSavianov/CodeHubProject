@@ -4,7 +4,7 @@ import Navbar from "../../../components/Navbar";
 
 export default function PythonNumbers() {
   return (
-    <main className="container">
+    <main>
       <Navbar></Navbar>
       <div className={`${styles.varContent}  ${styles.marginB}`}>
         <Section

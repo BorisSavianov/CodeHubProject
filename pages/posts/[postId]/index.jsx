@@ -312,7 +312,7 @@ export default function PostDetails({ post }) {
   };
 
   return (
-    <main className="container">
+    <main>
       <Navbar />
       <h2 className={styles.title}>{post.title}</h2>
       <p className={styles.PostContent}>{post.content}</p>

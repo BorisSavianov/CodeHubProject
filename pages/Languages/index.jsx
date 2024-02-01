@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Languages() {
   return (
-    <main className="container">
+    <main>
       <Navbar />
       <div id="cards">
         <Link href={"/Languages/PY"} className={styles.card}>

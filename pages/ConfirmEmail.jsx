@@ -99,7 +99,7 @@ export default function ConfirmEmail() {
   }
 
   return (
-    <div className="container">
+    <div>
       {error && <p>{error}</p>}
       <p>Объркали сте вашият имейл? Изтриете го.</p>
       <button onClick={handleDeleteAccount}>Изтрий акаунта</button>

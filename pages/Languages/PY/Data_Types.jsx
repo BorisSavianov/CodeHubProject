@@ -114,7 +114,7 @@ export default function PythonDataTypes() {
   }, [user]);
 
   return (
-    <main className="container">
+    <main>
       <Navbar></Navbar>
 
       <div className={`${styles.varContent} ${styles.marginB} `}>

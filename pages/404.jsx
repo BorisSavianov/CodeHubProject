@@ -8,7 +8,7 @@ export default function NotFound() {
   }, []);
 
   return (
-    <main className="container">
+    <main>
       <h1>Страницата не е намерена</h1>
     </main>
   );

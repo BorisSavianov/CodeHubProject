@@ -7,6 +7,7 @@ import Metatags from "../components/Metatags";
 import { getMessaging, getToken, onMessage, messaging } from "../lib/firebase";
 import { Analytics } from "@vercel/analytics/react";
 import "../styles/globals.css";
+import Footer from "@/components/Footer";
 
 const isEmailVerified = async (user) => {
   if (user) {
@@ -70,7 +71,7 @@ export default function MyApp({ Component, pageProps }) {
   }
 
   return (
-    <>
+    <div className="container">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -87,6 +88,7 @@ export default function MyApp({ Component, pageProps }) {
       <Component {...pageProps} user={user} username={username} />
       <Analytics />
       <Metatags />
-    </>
+      <Footer></Footer>
+    </div>
   );
 }

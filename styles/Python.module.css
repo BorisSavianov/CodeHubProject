@@ -11,16 +11,9 @@
   display: grid;
   place-items: center;
   margin-top: 20px;
-  height: 40vh;
   width: 300px;
   margin: 0 auto;
-
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  scrollbar-width: none; /* Firefox */
-}
-
-.Langcontent::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+  margin-bottom: 100px;
 }
 
 .content {

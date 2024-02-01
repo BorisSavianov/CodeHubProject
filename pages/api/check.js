@@ -3,8 +3,8 @@ import axios from "axios";
 
 export default async function handler(req, res) {
   try {
-    const { answer } = req.body;
-    const isCorrect = await checkAnswer(answer);
+    const { exerciseId, answer } = req.body;
+    const isCorrect = await checkAnswer(exerciseId, answer);
 
     if (isCorrect) {
       res.status(200).json({ message: "Правилен отговор!" });
@@ -17,21 +17,21 @@ export default async function handler(req, res) {
   }
 }
 
-async function checkAnswer(answer) {
+async function checkAnswer(exerciseId, answer) {
   try {
     const languageId = 71;
     const apiKey = "919a40c063msh26ada2748d136ffp1cad1ejsn767bdb56ef44"; // Use environment variable
 
-    // Check for common loopholes or invalid patterns
-    const invalidPatterns = [
-      "eval(",
-      "exec(",
-      "while True:",
-      "__import__(",
-      "open(",
-    ];
+    // Map exerciseId to its specific invalid patterns
+    const invalidPatterns = {
+      1: ["eval(", "exec(", "while True:", "__import__(", "open("],
+      2: ["eval(", "exec(", "while True:", "__import__(", "open("],
+      // Add more exercises as needed
+    };
 
-    if (invalidPatterns.some((pattern) => answer.includes(pattern))) {
+    if (
+      invalidPatterns[exerciseId].some((pattern) => answer.includes(pattern))
+    ) {
       console.error(
         "Invalid submission: Detected potential loophole or unsafe code."
       );
@@ -89,8 +89,13 @@ async function checkAnswer(answer) {
         ).toString();
         console.log("Decoded Output:", result);
 
+        const expectedOutputs = {
+          1: "1\n2\n3\n4\n5\n",
+          2: "1\n2\n3\n",
+        };
+
         // Compare the decoded output with the expected sequence of numbers
-        const expectedOutput = "1\n2\n3\n4\n5\n";
+        const expectedOutput = expectedOutputs[exerciseId];
         const isCorrect = result.trim() === expectedOutput.trim();
         return isCorrect;
       } else {

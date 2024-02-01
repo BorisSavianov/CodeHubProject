@@ -311,7 +311,7 @@ export default function UserProfile() {
   const isOwnAccount = userUsername === username; // Проверка дали потребителят разглежда своя собствен профил
 
   return (
-    <main className="container">
+    <main>
       <Navbar />
       <main className={styles.details}>
         <img src={user.photoURL} className={styles.profilePic}></img>

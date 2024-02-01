@@ -327,7 +327,7 @@ function LoginForm() {
 
   if (!user) {
     return (
-      <body className="container">
+      <body>
         <style>
           {`* {
   margin: 0;

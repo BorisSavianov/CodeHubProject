@@ -80,7 +80,7 @@ export default function PostsPage({ posts, user }) {
   };
 
   return (
-    <main className="container">
+    <main>
       <Navbar />
 
       <div className={styles.create}>

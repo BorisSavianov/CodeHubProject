@@ -36,21 +36,41 @@ export default function Home() {
     fetchUserXP();
   }, [user]);
 
-  const handleIncrementXP = async () => {
+  const handleIncrementXP = async (exerciseId) => {
     const firestore = getFirestore();
 
     try {
-      // Update state
-      setXP((prevXP) => prevXP + 1);
+      // Check if the user has already received XP for the current exercise
+      const userDocRef = doc(firestore, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
 
-      // Get the updated XP value
-      const updatedXP = xp + 1;
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
 
-      // Update Firestore with the correct user UID
-      await updateDoc(doc(firestore, "users", user.uid), { xp: updatedXP });
+        // Check if the user has received XP for the current exercise
+        if (!userData.exercises || !userData.exercises.includes(exerciseId)) {
+          // Update state
+          setXP((prevXP) => prevXP + 1);
 
-      // Show toast with the updated XP value
-      ToastComponent(`Отговорът е правилен!\nИмате ${updatedXP}xp.`, "success");
+          // Get the updated XP value
+          const updatedXP = xp + 1;
+
+          // Update Firestore with the correct user UID and mark exercise as completed
+          await updateDoc(doc(firestore, "users", user.uid), {
+            xp: updatedXP,
+            exercises: [...(userData.exercises || []), exerciseId],
+          });
+
+          // Show toast with the updated XP value
+          ToastComponent(
+            `Отговорът е правилен!\nИмате ${updatedXP}xp.`,
+            "success"
+          );
+        } else {
+          // User has already received XP for this exercise
+          ToastComponent("Отговорът е правилен!", "success");
+        }
+      }
     } catch (error) {
       console.error("Error updating user XP:", error);
     }
@@ -70,12 +90,16 @@ export default function Home() {
     try {
       const sanitizedAnswer = userAnswer.replace(/\n/g, "");
 
+      // Include exerciseId in the API request
+      const exerciseId = 1; // Add exerciseId here
       const response = await axios.post("/api/check", {
+        exerciseId: exerciseId, // Update exerciseId for the second exercise
         answer: sanitizedAnswer,
       });
+
       if (response.data.message === "Правилен отговор!") {
         // Increment XP when the answer is correct
-        handleIncrementXP();
+        handleIncrementXP(exerciseId); // Pass the correct exerciseId for the second exercise
       }
       setResult(response.data.message);
     } catch (error) {
@@ -85,7 +109,7 @@ export default function Home() {
   };
 
   return (
-    <div className="container">
+    <div>
       <Navbar></Navbar>
       <div className={`${styles.varContent}`}>
         <Section

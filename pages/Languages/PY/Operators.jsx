@@ -4,7 +4,7 @@ import Navbar from "../../../components/Navbar";
 
 export default function Operators() {
   return (
-    <main className="container">
+    <main>
       <Navbar />
       <div
         className={`${styles.varContent} ${styles.marginB} ${styles.content}`}
