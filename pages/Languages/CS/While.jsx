@@ -91,10 +91,10 @@ export default function PythonWhileLoop() {
       const sanitizedAnswer = userAnswer.replace(/\n/g, "");
 
       // Set the constant language code
-      const selectedLanguage = "python";
+      const selectedLanguage = "csharp";
 
       // Include exerciseId in the API request
-      const exerciseId = 2; // Add exerciseId here
+      const exerciseId = 4; // Add exerciseId here
       const response = await axios.post("/api/check", {
         exerciseId: exerciseId, // Update exerciseId for the second exercise
         answer: sanitizedAnswer,
@@ -248,7 +248,7 @@ export default function PythonWhileLoop() {
         </p>
         <textarea
           className={styles.answer}
-          value={userAnswer || `print("Hello, World!")`}
+          value={userAnswer || `# Напиши кода тук`}
           onChange={(e) => setUserAnswer(e.target.value)}
           onInput={(e) => {
             const sanitizedValue = e.target.value.replace(/\n/g, "");

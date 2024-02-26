@@ -45,7 +45,7 @@ export default function Languages() {
             </div>
           </div>
         </Link>
-        <Link href={"/"} className={styles.card}>
+        <Link href={"/Languages/CS"} className={styles.card}>
           <div className={styles.cardContent}>
             <Image
               className={styles.cardImage}

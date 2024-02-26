@@ -234,34 +234,6 @@ export default function Operators() {
             <td className={styles.varCode}>x is not y</td>
           </tr>
         </table>
-        <Section
-          header={"Оператори за Членство в Python"}
-          content={`Операторите за членство се използват за тестване дали последователност е представена в обект:`}
-          color={"blueBG"}
-        />
-        <table className={`${styles.table}  ${styles.marginB}`}>
-          <tr>
-            <th className={styles.varCode}>Оператор</th>
-            <th className={styles.varCode}>Описание</th>
-            <th className={styles.varCode}>Пример</th>
-          </tr>
-          <tr>
-            <td className={styles.varCode}>in</td>
-            <td className={styles.varCode}>
-              Връща True, ако последователност със зададената стойност е
-              присъства в обекта
-            </td>
-            <td className={styles.varCode}>x in y</td>
-          </tr>
-          <tr>
-            <td className={styles.varCode}>not in</td>
-            <td className={styles.varCode}>
-              Връща True, ако последователност със зададената стойност не е
-              присъства в обекта
-            </td>
-            <td className={styles.varCode}>x not in y</td>
-          </tr>
-        </table>
       </div>
     </main>
   );

@@ -3,8 +3,8 @@ import axios from "axios";
 
 export default async function handler(req, res) {
   try {
-    const { exerciseId, answer } = req.body;
-    const isCorrect = await checkAnswer(exerciseId, answer);
+    const { exerciseId, answer, language } = req.body;
+    const isCorrect = await checkAnswer(exerciseId, answer, language);
 
     if (isCorrect) {
       res.status(200).json({ message: "Правилен отговор!" });
@@ -17,16 +17,16 @@ export default async function handler(req, res) {
   }
 }
 
-async function checkAnswer(exerciseId, answer) {
+async function checkAnswer(exerciseId, answer, language) {
   try {
-    const languageId = 71;
     const apiKey = "919a40c063msh26ada2748d136ffp1cad1ejsn767bdb56ef44"; // Use environment variable
 
     // Map exerciseId to its specific invalid patterns
     const invalidPatterns = {
       1: ["eval(", "exec(", "while True:", "__import__(", "open("],
       2: ["eval(", "exec(", "while True:", "__import__(", "open("],
-      // Add more exercises as needed
+      3: ["unsafe", "Process.Start(", "File.WriteAllLines("],
+      4: ["unsafe", "Process.Start(", "File.WriteAllLines("],
     };
 
     if (
@@ -48,7 +48,7 @@ async function checkAnswer(exerciseId, answer) {
         "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
       },
       data: {
-        language_id: languageId,
+        language_id: getLanguageId(language),
         source_code: Buffer.from(answer).toString("base64"),
         stdin: "",
         expected_output: "1\n2\n3\n4\n5\n",
@@ -82,7 +82,6 @@ async function checkAnswer(exerciseId, answer) {
       }
 
       if (status.id === 4) {
-        // Status 4 corresponds to "Wrong Answer" in Judge0 API
         const result = Buffer.from(
           resultResponse.data.stdout,
           "base64"
@@ -92,11 +91,13 @@ async function checkAnswer(exerciseId, answer) {
         const expectedOutputs = {
           1: "1\n2\n3\n4\n5\n",
           2: "1\n2\n3\n",
+          3: "1\n2\n3\n4\n5\n",
+          4: "1\n2\n3\n",
         };
 
         // Compare the decoded output with the expected sequence of numbers
         const expectedOutput = expectedOutputs[exerciseId];
-        const isCorrect = result.trim() === expectedOutput.trim();
+        const isCorrect = result === expectedOutput;
         return isCorrect;
       } else {
         console.error("Judge0 API error:", resultResponse.data);
@@ -110,4 +111,16 @@ async function checkAnswer(exerciseId, answer) {
     console.error("Judge0 API error:", error.message);
     return false;
   }
+}
+
+function getLanguageId(language) {
+  const languageMap = {
+    python: 71,
+    csharp: 51,
+    cpp: 14,
+    java: 62,
+    // Add more languages as needed
+  };
+
+  return languageMap[language] || 71; // Default to Python if not found
 }

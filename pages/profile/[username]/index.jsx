@@ -288,26 +288,6 @@ export default function UserProfile() {
     return <p>Зареждане...</p>;
   }
 
-  const handleIncrementXP = async () => {
-    const firestore = getFirestore();
-
-    try {
-      // Update state
-      setXP((prevXP) => prevXP + 1);
-
-      // Get the updated XP value
-      const updatedXP = xp + 1;
-
-      // Update Firestore
-      await updateDoc(doc(firestore, "users", user.uid), { xp: updatedXP });
-
-      // Show toast with the updated XP value
-      ToastComponent(`Имате ${updatedXP}xp`, "info");
-    } catch (error) {
-      console.error("Error updating user XP:", error);
-    }
-  };
-
   const isOwnAccount = userUsername === username; // Проверка дали потребителят разглежда своя собствен профил
 
   return (
@@ -340,8 +320,6 @@ export default function UserProfile() {
           </div>
         </>
       )}
-
-      <button onClick={handleIncrementXP}>hi</button>
 
       <aside>
         <h2 className={styles.heading}>Публикации</h2>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../../../styles/Python.module.css";
 import Section from "../../../components/Section";
@@ -6,7 +6,6 @@ import Navbar from "../../../components/Navbar";
 import { getFirestore, updateDoc, doc, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import ToastComponent from "@/components/Toast";
-import { useEffect } from "react";
 
 export default function Home() {
   const [userAnswer, setUserAnswer] = useState("");
@@ -90,11 +89,15 @@ export default function Home() {
     try {
       const sanitizedAnswer = userAnswer.replace(/\n/g, "");
 
+      // Set the constant language code
+      const selectedLanguage = "python";
+
       // Include exerciseId in the API request
       const exerciseId = 1; // Add exerciseId here
       const response = await axios.post("/api/check", {
         exerciseId: exerciseId, // Update exerciseId for the second exercise
         answer: sanitizedAnswer,
+        language: selectedLanguage,
       });
 
       if (response.data.message === "Правилен отговор!") {
@@ -120,7 +123,8 @@ export default function Home() {
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
             <span className={styles.comment}>
-              # Пример: Извеждане на всяко плод в списък с плодове
+              # Пример: Извеждане на всеки плод
+              <br /> в списък с плодове
             </span>
             <br />
             <span className={styles.variable}>fruits</span> ={" "}
@@ -144,7 +148,8 @@ export default function Home() {
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
             <span className={styles.comment}>
-              # Пример: Итериране през буквите в думата "banana"
+              # Пример: Итериране през буквите
+              <br /> в думата "banana"
             </span>
             <br />
             <span className={styles.builtin}>for</span>{" "}
@@ -165,7 +170,8 @@ export default function Home() {
         <div className={styles.varCode}>
           <pre className={styles.codeText}>
             <span className={styles.comment}>
-              # Пример: Изход от цикъла, когато x е "banana"
+              # Пример: Изход от цикъла,
+              <br /> когато x е "banana"
             </span>
             <br />
             <span className={styles.variable}>fruits</span> ={" "}
@@ -192,7 +198,8 @@ export default function Home() {
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
             <span className={styles.comment}>
-              # Пример: Изход от цикъла, когато x е "banana" (break преди print)
+              # Пример: Изход от цикъла, <br />
+              когато x е "banana" (break преди print)
             </span>
             <br />
             <span className={styles.variable}>fruits</span> ={" "}
@@ -259,7 +266,8 @@ export default function Home() {
         <div className={styles.varCode}>
           <pre className={styles.codeText}>
             <span className={styles.comment}>
-              # Пример: Използване на функцията range()
+              # Пример: Използване на функцията <br />
+              range()
             </span>
             <br />
             <span className={styles.builtin}>for</span>{" "}
@@ -275,7 +283,8 @@ export default function Home() {
         <div className={`${styles.varCode}`}>
           <pre className={styles.codeText}>
             <span className={styles.comment}>
-              # Пример: Използване на параметъра start
+              # Пример: Използване на параметъра <br />
+              start
             </span>
             <br />
             <span className={styles.builtin}>for</span>{" "}
@@ -291,7 +300,8 @@ export default function Home() {
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
             <span className={styles.comment}>
-              # Пример: Увеличаване на последователността с 3
+              # Пример: Увеличаване на
+              <br /> последователността с 3
             </span>
             <br />
             <span className={styles.builtin}>for</span>{" "}
@@ -312,8 +322,8 @@ export default function Home() {
         <div className={`${styles.varCode}`}>
           <pre className={styles.codeText}>
             <span className={styles.comment}>
-              # Пример: Отпечатай всички числа от 0 до 5 и съобщение, когато
-              цикълът завърши
+              # Пример: Отпечатай всички числа от 0 до 5<br /> и съобщение,
+              когато цикълът завърши
             </span>
             <br />
             <span className={styles.builtin}>for</span>{" "}
@@ -336,7 +346,8 @@ export default function Home() {
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
             <span className={styles.comment}>
-              # Пример: Прекъсни цикъла, когато x е 3, провери блока else
+              # Пример: Прекъсни цикъла, когато x е 3,
+              <br /> провери блока else
             </span>
             <br />
             <span className={styles.builtin}>for</span>{" "}
@@ -369,7 +380,8 @@ export default function Home() {
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
             <span className={styles.comment}>
-              # Пример: Отпечатай всеки прилагател за всяко плод
+              # Пример: Отпечатай всеки прилагател
+              <br /> за всeки плод
             </span>
             <br />
             <span className={styles.variable}>adj</span> ={" "}
@@ -404,7 +416,7 @@ export default function Home() {
         </p>
         <textarea
           className={styles.answer}
-          value={userAnswer}
+          value={userAnswer || `print("Hello, World!")`}
           onChange={(e) => setUserAnswer(e.target.value)}
           onInput={(e) => {
             const sanitizedValue = e.target.value.replace(/\n/g, "");
@@ -415,7 +427,7 @@ export default function Home() {
           rows={5}
           cols={5}
           maxLength={100}
-        />
+        ></textarea>
 
         <button className={styles.submitBtn} onClick={handleSubmit}>
           Предай
