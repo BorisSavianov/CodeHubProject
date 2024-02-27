@@ -9,7 +9,7 @@ export default function CSharpMathFunctions() {
       <div className={`${styles.varContent}`}>
         <Section
           header={"C# Math"}
-          content={`The C# Math class has many methods that allow you to perform mathematical tasks on numbers.`}
+          content={`Класът C# Math разполага с много методи, които ви позволяват да извършвате математически операции с числа.`}
           color={"redBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
@@ -19,13 +19,13 @@ export default function CSharpMathFunctions() {
             <br />
             <span
               className={styles.comment}
-            >{`// The Math.Max(x, y) method can be used `}</span>
+            >{`// Методът Math.Max(x, y) може да се използва `}</span>
             <br />
             <span
               className={styles.comment}
-            >{`to find the highest value of x and y:`}</span>
+            >{`за намиране на най-голямата стойност между x и y:`}</span>
             <br />
-            <span className={styles.builtin}>Example</span>
+            <span className={styles.builtin}>Пример</span>
             <br />
             <br />
             <span className={styles.variable}>Math.Max</span>(5, 10);
@@ -33,7 +33,7 @@ export default function CSharpMathFunctions() {
         </div>
         <Section
           header={"Math.Min(x, y)"}
-          content={`The Math.Min(x, y) method can be used to find the lowest value of x and y:`}
+          content={`Методът Math.Min(x, y) може да се използва за намиране на най-малката стойност между x и y:`}
           color={"purpleBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
@@ -43,13 +43,13 @@ export default function CSharpMathFunctions() {
             <br />
             <span
               className={styles.comment}
-            >{`// The Math.Min(x, y) method can be used `}</span>
+            >{`// Методът Math.Min(x, y) може да се използва `}</span>
             <br />
             <span
               className={styles.comment}
-            >{`to find the lowest value of x and y:`}</span>
+            >{`за намиране на най-малката стойност между x и y:`}</span>
             <br />
-            <span className={styles.builtin}>Example</span>
+            <span className={styles.builtin}>Пример</span>
             <br />
             <br />
             <span className={styles.variable}>Math.Min</span>(5, 10);
@@ -57,7 +57,7 @@ export default function CSharpMathFunctions() {
         </div>
         <Section
           header={"Math.Sqrt(x)"}
-          content={`The Math.Sqrt(x) method returns the square root of x:`}
+          content={`Методът Math.Sqrt(x) връща корен квадратен от x:`}
           color={"greenBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
@@ -67,11 +67,11 @@ export default function CSharpMathFunctions() {
             <br />
             <span
               className={styles.comment}
-            >{`// The Math.Sqrt(x) method returns `}</span>
+            >{`// Методът Math.Sqrt(x) връща `}</span>
             <br />
-            <span className={styles.comment}>{`the square root of x:`}</span>
+            <span className={styles.comment}>{`корен квадратен от x:`}</span>
             <br />
-            <span className={styles.builtin}>Example</span>
+            <span className={styles.builtin}>Пример</span>
             <br />
             <br />
             <span className={styles.variable}>Math.Sqrt</span>(64);
@@ -79,7 +79,7 @@ export default function CSharpMathFunctions() {
         </div>
         <Section
           header={"Math.Abs(x)"}
-          content={`The Math.Abs(x) method returns the absolute (positive) value of x:`}
+          content={`Методът Math.Abs(x) връща абсолютната (положителна) стойност на x:`}
           color={"blueBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
@@ -89,13 +89,13 @@ export default function CSharpMathFunctions() {
             <br />
             <span
               className={styles.comment}
-            >{`// The Math.Abs(x) method returns `}</span>
+            >{`// Методът Math.Abs(x) връща `}</span>
             <br />
             <span
               className={styles.comment}
-            >{`the absolute (positive) value of x:`}</span>
+            >{`абсолютната (положителна) стойност на x:`}</span>
             <br />
-            <span className={styles.builtin}>Example</span>
+            <span className={styles.builtin}>Пример</span>
             <br />
             <br />
             <span className={styles.variable}>Math.Abs</span>(-4.7);
@@ -103,7 +103,7 @@ export default function CSharpMathFunctions() {
         </div>
         <Section
           header={"Math.Round()"}
-          content={`Math.Round() rounds a number to the nearest whole number:`}
+          content={`Math.Round() закръгля число до най-близкото цяло число:`}
           color={"purpleBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
@@ -113,13 +113,13 @@ export default function CSharpMathFunctions() {
             <br />
             <span
               className={styles.comment}
-            >{`// Math.Round() rounds a number `}</span>
+            >{`// Math.Round() закръгля число `}</span>
             <br />
             <span
               className={styles.comment}
-            >{`to the nearest whole number:`}</span>
+            >{`до най-близкото цяло число:`}</span>
             <br />
-            <span className={styles.builtin}>Example</span>
+            <span className={styles.builtin}>Пример</span>
             <br />
             <br />
             <span className={styles.variable}>Math.Round</span>(9.99);

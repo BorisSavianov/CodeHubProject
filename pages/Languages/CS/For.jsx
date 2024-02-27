@@ -118,14 +118,14 @@ export default function Home() {
       <div className={`${styles.varContent}`}>
         <Section
           header={"C# For Loop"}
-          content={`When you know exactly how many times you want to loop through a block of code, use the for loop instead of a while loop:`}
+          content={`Когато знаете точно колко пъти искате да циклирате блок код, използвайте for цикъла вместо while цикъл:`}
           color={"redBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
-            {/* C# For Loop Example */}
+            {/* C# Пример с For Цикъл */}
             <span className={styles.comment}>
-              // Example: Print numbers 0 to 4
+              // Пример: Извеждане на числа от 0 до 4
             </span>
             <br />
             <span className={styles.builtin}>for</span>{" "}
@@ -141,14 +141,14 @@ export default function Home() {
           </pre>
         </div>
         <Section
-          header={"Nested Loops"}
-          content={`It is also possible to place a loop inside another loop. This is called a nested loop.`}
+          header={"Вложени Цикли"}
+          content={`Също така е възможно да поставите един цикъл в друг. Това се нарича вложен цикъл.`}
           color={"purpleBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
-            {/* C# Nested Loop Example */}
-            <span className={styles.comment}>// Example: Nested loops</span>
+            {/* C# Пример с Вложен Цикъл */}
+            <span className={styles.comment}>// Пример: Вложени цикли</span>
             <br />
             <span className={styles.builtin}>for</span>{" "}
             <span className={styles.variable}>(int i = 1; i &lt;= 2; ++i)</span>{" "}
@@ -156,13 +156,13 @@ export default function Home() {
             <br />
             <span className={styles.codeIndent}>
               <span className={styles.builtin}>Console.WriteLine</span>(
-              <span className={styles.string}>"Outer: "</span> +{" "}
+              <span className={styles.string}>"Външен: "</span> +{" "}
               <span className={styles.variable}>i</span>);{" "}
-              {/* Executes 2 times */}
+              {/* Изпълнява се 2 пъти */}
             </span>
             <br />
             <span className={styles.codeIndent}>
-              {/* Inner loop */}
+              {/* Вътрешен цикъл */}
               <span className={styles.builtin}>for</span>{" "}
               <span className={styles.variable}>
                 (int j = 1; j &lt;= 3; j++)
@@ -171,9 +171,9 @@ export default function Home() {
               <br />
               <span className={styles.codeIndent2}>
                 <span className={styles.builtin}>Console.WriteLine</span>(
-                <span className={styles.string}>" Inner: "</span> +{" "}
+                <span className={styles.string}>" Вътрешен: "</span> +{" "}
                 <span className={styles.variable}>j</span>);{" "}
-                {/* Executes 6 times (2 * 3) */}
+                {/* Изпълнява се 6 пъти (2 * 3) */}
               </span>
               <br />
               <span className={styles.codeIndent}>{"}"}</span>
@@ -183,15 +183,15 @@ export default function Home() {
           </pre>
         </div>
         <Section
-          header={"foreach Loop"}
-          content={`There is also a foreach loop, which is used exclusively to loop through elements in an array:`}
+          header={"foreach Цикъл"}
+          content={`Също така има foreach цикъл, който се използва изключително за циклиране през елементи в масив:`}
           color={"greenBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
-            {/* C# foreach Loop Example */}
+            {/* C# Пример с foreach Цикъл */}
             <span className={styles.comment}>
-              // Example: Loop through elements in the cars array
+              // Пример: Циклиране през елементи в масива cars
             </span>
             <br />
             <span className={styles.variable}>
@@ -214,7 +214,8 @@ export default function Home() {
       <aside className={styles.quiz}>
         <h1>Задача</h1>
         <p>
-          Направи C# код който извежда числата от 1 до 5 използвайки for loop:
+          Направете C# код, който извежда числата от 1 до 5, използвайки for
+          цикъл:
         </p>
         <textarea
           className={styles.answer}

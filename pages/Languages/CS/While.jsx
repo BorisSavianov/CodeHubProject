@@ -118,7 +118,7 @@ export default function PythonWhileLoop() {
       <div className={`${styles.varContent}`}>
         <Section
           header={"Цикълът while"}
-          content={`С цикъла while можем да изпълним определен набор от операции, докато условието е истина.`}
+          content={`С while цикъла можем да изпълним определен набор от операции, докато условието е истина.`}
           color={"redBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
@@ -243,8 +243,8 @@ export default function PythonWhileLoop() {
       <aside className={styles.quiz}>
         <h1>Задача</h1>
         <p>
-          Направи Python код който извежда числата от 1 до 3 използвайки while
-          loop:
+          Направете Python код, който извежда числата от 1 до 3, използвайки
+          while loop:
         </p>
         <textarea
           className={styles.answer}

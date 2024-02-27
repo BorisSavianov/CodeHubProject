@@ -8,83 +8,83 @@ export default function CSharpConditions() {
       <Navbar></Navbar>
       <div className={`${styles.varContent}`}>
         <Section
-          header={"C# Conditions and If Statements"}
-          content={`C# supports the usual logical conditions from mathematics:`}
+          header={"C# Условия и If Изявления"}
+          content={`C# поддържа обичайните логически условия от математиката:`}
           color={"redBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
-            Less than: a {"<"} b
+            По-малко от: a {"<"} b
             <br />
-            Less than or equal to: a {"<="} b
+            По-малко или равно на: a {"<="} b
             <br />
-            Greater than: a {">"} b
+            По-голямо от: a {">"} b
             <br />
-            Greater than or equal to: a {">="} b
+            По-голямо или равно на: a {">="} b
             <br />
-            Equal to a == b
+            Равно на: a == b
             <br />
-            Not Equal to: a != b
+            Неравно на: a != b
           </pre>
         </div>
         <Section
-          header={"The if Statement"}
-          content={`Use the if statement to specify a block of C# code to be executed if a condition is True.`}
+          header={"Изявлението if"}
+          content={`Използвайте изявлението if, за да укажете блок от C# код, който да се изпълни, ако условието е Вярно.`}
           color={"purpleBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
-            if (condition) &#123;
+            if (условие) &#123;
             <br />
-            &nbsp;&nbsp;&nbsp;// block of code to be executed <br />
-            &nbsp;&nbsp; //if the condition is True
+            &nbsp;&nbsp;&nbsp;// блок от код, който ще се изпълни <br />
+            &nbsp;&nbsp; //ако условието е Вярно
             <br />
             &#125;
           </pre>
         </div>
         <Section
-          header={"The else Statement"}
-          content={`Use the else statement to specify a block of code to be executed if the condition is False.`}
+          header={"Изявлението else"}
+          content={`Използвайте изявлението else, за да укажете блок от код, който да се изпълни, ако условието е Грешно.`}
           color={"greenBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
-            if (condition) &#123;
+            if (условие) &#123;
             <br />
-            &nbsp;&nbsp;&nbsp;// block of code to be executed <br />
-            &nbsp;&nbsp; //if the condition is True
+            &nbsp;&nbsp;&nbsp;// блок от код, който ще се изпълни <br />
+            &nbsp;&nbsp; //ако условието е Вярно
             <br />
             &#125; else &#123;
             <br />
-            &nbsp;&nbsp;&nbsp;// block of code to be executed <br />
-            &nbsp;&nbsp; //if the condition is False
+            &nbsp;&nbsp;&nbsp;// блок от код, който ще се изпълни <br />
+            &nbsp;&nbsp; //ако условието е Грешно
             <br />
             &#125;
           </pre>
         </div>
         <Section
-          header={"The else if Statement"}
-          content={`Use the else if statement to specify a new condition if the first condition is False.`}
+          header={"Изявлението else if"}
+          content={`Използвайте изявлението else if, за да укажете ново условие, ако първото условие е Грешно.`}
           color={"purpleBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
-            if (condition1) &#123;
+            if (условие1) &#123;
             <br />
-            &nbsp;&nbsp;&nbsp;// block of code to be executed <br />
-            &nbsp;&nbsp; //if condition1 is True
+            &nbsp;&nbsp;&nbsp;// блок от код, който ще се изпълни <br />
+            &nbsp;&nbsp; //ако условие1 е Вярно
             <br />
-            &#125; else if (condition2) &#123;
+            &#125; else if (условие2) &#123;
             <br />
-            &nbsp;&nbsp;&nbsp;// block of code to be executed <br />
-            &nbsp;&nbsp; //if the condition1 is false and condition2 <br />
-            &nbsp;&nbsp; //is True
+            &nbsp;&nbsp;&nbsp;// блок от код, който ще се изпълни <br />
+            &nbsp;&nbsp; //ако условие1 е Грешно и условие2 <br />
+            &nbsp;&nbsp; //е Вярно
             <br />
             &#125; else &#123;
             <br />
-            &nbsp;&nbsp;&nbsp;// block of code to be executed <br />
-            &nbsp;&nbsp; //if the condition1 is false and condition2 <br />
-            &nbsp;&nbsp; //is False
+            &nbsp;&nbsp;&nbsp;// блок от код, който ще се изпълни <br />
+            &nbsp;&nbsp; //ако условие1 е Грешно и условие2 <br />
+            &nbsp;&nbsp; //е Грешно
             <br />
             &#125;
           </pre>

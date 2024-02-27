@@ -8,19 +8,19 @@ export default function CSharpArrays() {
       <Navbar></Navbar>
       <div className={`${styles.varContent}`}>
         <Section
-          header={"Create an Array"}
-          content={`Arrays are used to store multiple values in a single variable, instead of declaring separate variables for each value.`}
+          header={"Създаване на масив"}
+          content={`Масивите се използват за съхранение на множество стойности в една променлива, вместо да се декларират отделни променливи за всяка стойност.`}
           color={"redBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
-            <span className={styles.comment}>// To declare an array:</span>
+            <span className={styles.comment}>// За деклариране на масив:</span>
             <br />
             <span className={styles.variable}>string[] cars;</span>
             <br />
             <br />
             <span className={styles.comment}>
-              // Declare and initialize an array:
+              // Деклариране и инициализиране на масив:
             </span>
             <br />
             <span className={styles.variable}>string[] cars</span> = {"{"}
@@ -32,29 +32,33 @@ export default function CSharpArrays() {
           </pre>
         </div>
         <Section
-          header={"Access the Elements of an Array"}
-          content={`You access an array element by referring to the index number.`}
+          header={"Достъп до елементите на масива"}
+          content={`Достъпът до елемент на масива става, като се обръщате към индексния номер.`}
           color={"purpleBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
-            <span className={styles.comment}>// Access an array element:</span>
+            <span className={styles.comment}>
+              // Достъп до елемент на масива:
+            </span>
             <br />
             <span className={styles.variable}>Console.WriteLine</span>(
             <span className={styles.variable}>cars</span>[
             <span className={styles.number}>0</span>]);
             <br />
-            <span className={styles.comment}>// Outputs Volvo</span>
+            <span className={styles.comment}>// Извежда Volvo</span>
           </pre>
         </div>
         <Section
-          header={"Change an Array Element"}
-          content={`To change the value of a specific element, refer to the index number.`}
+          header={"Промяна на елемент на масива"}
+          content={`За промяна на стойността на конкретен елемент се използва индексният номер.`}
           color={"greenBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
-            <span className={styles.comment}>// Change an array element:</span>
+            <span className={styles.comment}>
+              // Промяна на елемент на масива:
+            </span>
             <br />
             <span className={styles.variable}>cars</span>[
             <span className={styles.number}>0</span>] =
@@ -62,37 +66,37 @@ export default function CSharpArrays() {
             <br />
             <br />
             <span className={styles.comment}>
-              // Now outputs Opel instead of Volvo
+              // Сега извежда Opel вместо Volvo
             </span>
           </pre>
         </div>
         <Section
-          header={"Array Length"}
-          content={`To find out how many elements an array has, use the Length property.`}
+          header={"Дължина на масива"}
+          content={`За да разберете колко елемента има масивът, използвайте свойството Length.`}
           color={"blueBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
             <span className={styles.comment}>
-              // Get the length of the array:
+              // Получаване на дължината на масива:
             </span>
             <br />
             <span className={styles.variable}>Console.WriteLine</span>(
             <span className={styles.variable}>cars.Length</span>);
             <br />
-            <span className={styles.comment}>// Outputs 4</span>
+            <span className={styles.comment}>// Извежда 4</span>
           </pre>
         </div>
         <div className={`${styles.varContent}`}>
           <Section
-            header={"Loop Through an Array"}
-            content={`You can loop through the array elements with the for loop, and use the Length property to specify how many times the loop should run.`}
+            header={"Цикъл през масива"}
+            content={`Можете да циклирате през елементите на масива с for цикъла и да използвате свойството Length, за да укажете колко пъти трябва да се изпълни цикълът.`}
             color={"redBG"}
           />
           <div className={`${styles.varCode} ${styles.marginB}`}>
             <pre className={styles.codeText}>
               <span className={styles.comment}>
-                // Loop through an array with for loop:
+                // Цикъл през масив с for цикъл:
               </span>
               <br />
               <span className={styles.variable}>string[] cars</span> = {"{"}
@@ -118,14 +122,14 @@ export default function CSharpArrays() {
             </pre>
           </div>
           <Section
-            header={"The foreach Loop"}
-            content={`There is also a foreach loop, which is used exclusively to loop through elements in an array.`}
+            header={"Цикълът foreach"}
+            content={`Съществува също така цикълът foreach, който се използва изключително за циклиране през елементи в масив.`}
             color={"purpleBG"}
           />
           <div className={`${styles.varCode} ${styles.marginB}`}>
             <pre className={styles.codeText}>
               <span className={styles.comment}>
-                // Loop through an array with foreach loop:
+                // Цикъл през масив с foreach цикъл:
               </span>
               <br />
               <span className={styles.variable}>string[] cars</span> = {"{"}

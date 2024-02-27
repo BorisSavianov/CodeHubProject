@@ -9,20 +9,24 @@ export default function CSharpVariables() {
       <Navbar></Navbar>
       <div className={` ${styles.varContent}`}>
         <Section
-          header={"Variables"}
-          content={`Variables are containers for storing data values.`}
+          header={"Променливи"}
+          content={`Променливите са контейнери за съхранение на стойности на данни.`}
           color={"redBG"}
         />
         <div className={styles.varCode}>
           <pre className={styles.codeText}>
-            <span className={styles.keyword}>// Example: storing text</span>
+            <span className={styles.keyword}>
+              // Пример: съхранение на текст
+            </span>
             <br />
             <span className={styles.string}>string</span> name = "John";
             <br />
             <span className={styles.builtin}>Console.WriteLine</span>(name);
             <br />
             <br />
-            <span className={styles.keyword}>// Example: storing a number</span>
+            <span className={styles.keyword}>
+              // Пример: съхранение на число
+            </span>
             <br />
             <span className={styles.keyword}>int</span> myNum = 15;
             <br />
@@ -31,14 +35,14 @@ export default function CSharpVariables() {
         </div>
         <div className={styles.marginB}></div>
         <Section
-          header={"Declaring (Creating) Variables"}
-          content={`To create a variable, you must specify the type and assign it a value.`}
+          header={"Деклариране (Създаване) на Променливи"}
+          content={`За да създадете променлива, трябва да посочите типа и да й присвоите стойност.`}
           color={"purpleBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
             <span className={styles.keyword}>
-              // Example: declaring without assigning
+              // Пример: деклариране без присвояване
             </span>
             <br />
             <span className={styles.keyword}>int</span> myNum;
@@ -49,20 +53,20 @@ export default function CSharpVariables() {
             <br />
             <br />
             <span className={styles.keyword}>
-              // Example: changing the value
+              // Пример: промяна на стойността
             </span>
             <br />
             <span className={styles.keyword}>int</span> myNum = 15;
             <br />
             myNum = 20;{" "}
-            <span className={styles.comment}>// myNum is now 20</span>
+            <span className={styles.comment}>// myNum сега е 20</span>
             <br />
             <span className={styles.builtin}>Console.WriteLine</span>(myNum);
           </pre>
         </div>
         <Section
-          header={"Other Types"}
-          content={`A demonstration of how to declare variables of other types:`}
+          header={"Други Типове"}
+          content={`Демонстрация как да декларирате променливи от други типове:`}
           color={"greenBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
@@ -80,20 +84,20 @@ export default function CSharpVariables() {
           </pre>
         </div>
         <Section
-          header={"Constants"}
-          content={`If you don't want others to overwrite existing values, use the const keyword.`}
+          header={"Константи"}
+          content={`Ако не искате други да презаписват съществуващите стойности, използвайте ключовата дума const.`}
           color={"blueBG"}
         />
         <div className={`${styles.varCode} ${styles.marginB}`}>
           <pre className={styles.codeText}>
             <span className={styles.keyword}>
-              // Example: constant variable
+              // Пример: константна променлива
             </span>
             <br />
             <span className={styles.keyword}>const</span>{" "}
             <span className={styles.keyword}>int</span> myNum = 15;
             <br />
-            <span className={styles.comment}>// myNum = 20; // error</span>
+            <span className={styles.comment}>// myNum = 20; // грешка</span>
           </pre>
         </div>
       </div>
