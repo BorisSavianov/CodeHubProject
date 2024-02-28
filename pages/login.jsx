@@ -121,7 +121,7 @@ function LoginForm() {
       case "auth/user-cancelled":
         return ToastComponent("Потребителят отказа.", "error");
       default:
-        return ToastComponent("Грешка. Моля, опитайте по-късно.", "error");
+        return 0;
     }
   };
 
@@ -171,7 +171,7 @@ function LoginForm() {
       console.log("Google sign-in successful");
       const isNewUser = userCredential.additionalUserInfo.isNewUser;
       setUsername("");
-
+      console.log("1");
       if (isNewUser) {
         const newPassword = prompt("Please enter a password:");
         if (newPassword === null) {
@@ -201,9 +201,11 @@ function LoginForm() {
       setPassword("");
       setError("");
 
+      console.log("2");
       setLoading(false);
       ToastComponent("Успешно вписване", "success");
       router.push("/");
+      console.log("3");
     } catch (error) {
       setError(handleFirebaseError(error.code));
     } finally {
@@ -336,21 +338,19 @@ function LoginForm() {
 }
 
 body {
-  background-color: #c9d6ff;
-  background: linear-gradient(to right, #e2e2e2, #c9d6ff);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   height: 100vh;
-  width: 100vw
-}
-        `}
+  width: 100vw;
+  overflow-x: hidden;
+}`}
         </style>
         <div className={styles.container} id="container">
           <div className={`${styles["form-container"]} ${styles["sign-up"]}`}>
             <form onSubmit={handleSignup} ref={formRef}>
-              <h1>Create Account</h1>
+              <h1>Създайте профил</h1>
               <div className={styles["social-icons"]}>
                 <a onClick={handleGoogleSignIn} className={styles.icon}>
                   <img src="google.png"></img>
@@ -359,30 +359,30 @@ body {
                   <img src="github.png"></img>
                 </a>
               </div>
-              <span>or use your email for registration</span>
+              <span>или използвайте имейл за регистрация</span>
 
               <input
                 type="email"
-                placeholder="Email"
+                placeholder="Имейл"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className={styles.input}
               />
               <input
                 type="password"
-                placeholder="Password"
+                placeholder="Парола"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className={styles.input}
               />
               <button type="submit" className={styles.button}>
-                Sign Up
+                Регистрирайте се
               </button>
             </form>
           </div>
           <div className={`${styles["form-container"]} ${styles["sign-in"]}`}>
             <form onSubmit={handleLogin}>
-              <h1>Sign In</h1>
+              <h1>Влезте в профила си</h1>
               <div className={styles["social-icons"]}>
                 <a onClick={handleGoogleSignIn} className={styles.icon}>
                   <img src="google.png"></img>
@@ -391,24 +391,24 @@ body {
                   <img src="github.png"></img>
                 </a>
               </div>
-              <span>or use your email password</span>
+              <span>или използвайте имейл и парола</span>
               <input
                 type="email"
-                placeholder="Email"
+                placeholder="Имейл"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className={styles.input}
               />
               <input
                 type="password"
-                placeholder="Password"
+                placeholder="Парола"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className={styles.input}
               />
 
               <button type="submit" className={styles.button}>
-                Sign In
+                Влезте
               </button>
             </form>
           </div>
@@ -417,9 +417,10 @@ body {
               <div
                 className={`${styles["toggle-panel"]} ${styles["toggle-left"]}`}
               >
-                <h1>Welcome Back!</h1>
+                <h1>Добре дошли обратно!</h1>
                 <p>
-                  Enter your personal details to use all of the site features
+                  Въведете личните си данни, за да използвате всички функции на
+                  сайта
                 </p>
                 <button
                   className={`${styles.hidden} ${styles.login} ${
@@ -427,16 +428,16 @@ body {
                   }`}
                   id="login"
                 >
-                  Sign In
+                  Влезте
                 </button>
               </div>
               <div
                 className={`${styles["toggle-panel"]} ${styles["toggle-right"]}`}
               >
-                <h1>Hello, Friend!</h1>
+                <h1>Здравей, Приятелю!</h1>
                 <p>
-                  Register with your personal details to use all of the site
-                  features
+                  Регистрирайте се с личните си данни, за да използвате всички
+                  функции на сайта
                 </p>
                 <button
                   className={`${styles.hidden} ${styles.register} ${
@@ -444,7 +445,7 @@ body {
                   }`}
                   id="register"
                 >
-                  Sign Up
+                  Регистрирайте се
                 </button>
               </div>
             </div>
@@ -472,6 +473,10 @@ body {
         </div>
       </div>
     );
+  }
+
+  if (user && !showUsernameField) {
+    router.push("/");
   }
 }
 

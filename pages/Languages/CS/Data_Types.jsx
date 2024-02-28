@@ -6,6 +6,7 @@ import QuizQuestion from "@/components/QuizQuestion";
 import { getFirestore, updateDoc, doc, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import ToastComponent from "@/components/Toast";
+import { set } from "firebase/database";
 
 const CSharpDataTypes = ({ user }) => {
   const [xp, setXP] = useState(0);
@@ -118,36 +119,40 @@ export default function DataTypes() {
 
       <div className={`${styles.varContent}`}>
         <Section
-          header={"Data Types in C#"}
-          content={`As explained in the variables chapter, a variable in C# must be a specified data type:`}
+          header={"Типове данни в C#"}
+          content={`Както е обяснено в главата за променливите, променлива в C# трябва да бъде определен тип данни:`}
           color={"redBG"}
         />
         <div className={styles.varCode}>
           <pre className={styles.codeText}>
-            <span className={styles.comment}>// Example: storing text</span>
+            <span className={styles.comment}>
+              // Пример: запазване на текст
+            </span>
             <br />
             <span className={styles.keyword}>string</span> name = "John";
             <br />
             <span className={styles.builtin}>Console.WriteLine</span>(name);
             <br />
             <br />
-            <span className={styles.comment}>// Example: storing a number</span>
+            <span className={styles.comment}>
+              // Пример: запазване на число
+            </span>
             <br />
             <span className={styles.keyword}>int</span> myNum = 5;{" "}
-            <span className={styles.comment}>// Integer (whole number)</span>
+            <span className={styles.comment}>// Цяло число</span>
             <br />
             <span className={styles.keyword}>double</span> myDoubleNum = 5.99D;
-            <span className={styles.comment}>// Floating point number</span>
+            <span className={styles.comment}>// Число с плаваща запетая</span>
             <br />
             <span className={styles.keyword}>char</span> myLetter = 'D';{" "}
-            <span className={styles.comment}>// Character</span>
+            <span className={styles.comment}>// Символ</span>
             <br />
             <span className={styles.keyword}>bool</span> myBool ={" "}
             <span className={styles.builtin}>true</span>;{" "}
-            <span className={styles.comment}>// Boolean</span>
+            <span className={styles.comment}>// Булева стойност</span>
             <br />
             <span className={styles.keyword}>string</span> myText = "Hello";{" "}
-            <span className={styles.comment}>// String</span>
+            <span className={styles.comment}>// Низ</span>
             <br />
             <span className={styles.builtin}>Console.WriteLine</span>(myNum);
           </pre>
@@ -156,65 +161,68 @@ export default function DataTypes() {
         <div className={styles.marginB}></div>
         <div className={`${styles.varContent}`}>
           <Section
-            header={"Data Type Size Description"}
-            content={`int 4 bytes Stores whole numbers from -2,147,483,648 to 2,147,483,647`}
+            header={"Описание на размера на типовете данни"}
+            content={`int 4 байта Запазва цели числа от -2,147,483,648 до 2,147,483,647`}
             color={"blueBG"}
           />
           <div className={styles.table}>
             <table>
               <tr>
-                <th className={styles.varCode}>Data Type</th>
-                <th className={styles.varCode}>Size</th>
-                <th className={styles.varCode}>Description</th>
+                <th className={styles.varCode}>Тип данни</th>
+                <th className={styles.varCode}>Размер</th>
+                <th className={styles.varCode}>Описание</th>
               </tr>
               <tr>
                 <td className={styles.varCode}>int</td>
-                <td className={styles.varCode}>4 bytes</td>
+                <td className={styles.varCode}>4 байта</td>
                 <td className={styles.varCode}>
-                  Stores whole numbers from -2,147,483,648 to 2,147,483,647
+                  Запазва цели числа от -2,147,483,648 до 2,147,483,647
                 </td>
               </tr>
               <tr>
                 <td className={styles.varCode}>long</td>
-                <td className={styles.varCode}>8 bytes</td>
+                <td className={styles.varCode}>8 байта</td>
                 <td className={styles.varCode}>
-                  Stores whole numbers from -9,223,372,036,854,775,808 to
+                  Запазва цели числа от -9,223,372,036,854,775,808 до
                   9,223,372,036,854,775,807
                 </td>
               </tr>
               <tr>
                 <td className={styles.varCode}>float</td>
-                <td className={styles.varCode}>4 bytes</td>
+                <td className={styles.varCode}>4 байта</td>
                 <td className={styles.varCode}>
-                  Stores fractional numbers. Sufficient for storing 6 to 7
-                  decimal digits
+                  Запазва дробни числа. Подходящ за запазване на 6 до 7
+                  десетични цифри
                 </td>
               </tr>
               <tr>
                 <td className={styles.varCode}>double</td>
-                <td className={styles.varCode}>8 bytes</td>
+                <td className={styles.varCode}>8 байта</td>
                 <td className={styles.varCode}>
-                  Stores fractional numbers. Sufficient for storing 15 decimal
-                  digits
+                  Запазва дробни числа. Подходящ за запазване на 15 десетични
+                  цифри
                 </td>
               </tr>
               <tr>
                 <td className={styles.varCode}>bool</td>
-                <td className={styles.varCode}>1 bit</td>
-                <td className={styles.varCode}>Stores true or false values</td>
+                <td className={styles.varCode}>1 бит</td>
+                <td className={styles.varCode}>
+                  Запазва стойности true или false
+                </td>
               </tr>
               <tr>
                 <td className={styles.varCode}>char</td>
-                <td className={styles.varCode}>2 bytes</td>
+                <td className={styles.varCode}>2 байта</td>
                 <td className={styles.varCode}>
-                  Stores a single character/letter, surrounded by single quotes
+                  Запазва единичен символ/буква, обграден от единични кавички
                 </td>
               </tr>
               <tr>
                 <td className={styles.varCode}>string</td>
-                <td className={styles.varCode}>2 bytes per character</td>
+                <td className={styles.varCode}>2 байта на символ</td>
                 <td className={styles.varCode}>
-                  Stores a sequence of characters, surrounded by double quotes
+                  Запазва последователност от символи, обградена от двойни
+                  кавички
                 </td>
               </tr>
             </table>
@@ -222,60 +230,40 @@ export default function DataTypes() {
         </div>
         <div className={styles.marginB}></div>
         <Section
-          header={"Numbers"}
-          content={`Number types are divided into two groups: Integer types and Floating point types`}
+          header={"Числа"}
+          content={`Типовете числа се делят на две групи: Целочислени типове и Типове с плаваща запетая`}
           color={"blueBG"}
         />
         <div className={styles.marginB}></div>
         <Section
-          header={"Integer Types"}
+          header={"Целочислени типове"}
           content={`Int
 
-          The int data type can store whole numbers from -2147483648 to 2147483647. In general, and in our tutorial, the int data type is the preferred data type when we create variables with a numeric value.`}
+          Типът данни int може да съхранява цели числа от -2147483648 до 2147483647. Обикновено и в нашето ръководство, типът данни int е предпочитан, когато създаваме променливи с числова стойност.`}
           color={"greenBG"}
         />
 
-        <Section
-          header={"Floating point types"}
-          content={`Int
-
-          The int data type can store whole numbers from -2147483648 to 2147483647. In general, and in our tutorial, the int data type is the preferred data type when we create variables with a numeric value.`}
-          color={"greenBG"}
-        />
-        <div className={styles.marginB}></div>
-        <Section
-          header={"Booleans"}
-          content={`A boolean data type is declared with the bool keyword and can only take the values true or false:`}
-          color={"purpleBG"}
-        />
-        <div className={styles.marginB}></div>
-        <Section
-          header={"Characters"}
-          content={`The char data type is used to store a single character. The character must be surrounded by single quotes, like 'A' or 'c':`}
-          color={"purpleBG"}
-        />
-        <div className={styles.marginB}></div>
-        <Section
-          header={"Strings"}
-          content={`The string data type is used to store a sequence of characters (text). String values must be surrounded by double quotes:`}
-          color={"purpleBG"}
-        />
-        <div className={styles.marginB}></div>
         <div className={styles.varCode}>
           <pre className={styles.codeText}>
-            <span className={styles.keyword}>// Integer Types</span>
+            <span className={styles.keyword}>// Целочислени типове</span>
             <br />
             <span className={styles.keyword}>Int</span>
             <br />
             <br />
             <span className={styles.string}>
-              The int data type can store whole numbers from -2147483648 to
-              2147483647. In general, and in our tutorial, the int data type is
-              the preferred data type when we create variables with a numeric
-              value.
+              Типът данни int може да съхранява цели
+              <br />
+              числа от -2147483648 до 2147483647.
+              <br />
+              Обикновено и в нашето ръководство,
+              <br />
+              типът данни int е предпочитан
+              <br />
+              при създаването на променливи с <br />
+              числова стойност.
             </span>
             <br />
-            <span className={styles.keyword}>Example</span>
+            <span className={styles.keyword}>Пример</span>
             <br />
             <br />
             <span className={styles.keyword}>int</span> myNum = 100000;
@@ -287,13 +275,19 @@ export default function DataTypes() {
             <br />
             <br />
             <span className={styles.string}>
-              The long data type can store whole numbers from
-              -9223372036854775808 to 9223372036854775807. This is used when int
-              is not large enough to store the value. Note that you should end
-              the value with an "L":
+              Типът данни long може да съхранява цели
+              <br />
+              числа от -9223372036854775808 до <br />
+              9223372036854775807.
+              <br />
+              Този тип се използва, когато int не е <br />
+              достатъчно голям, за
+              <br />
+              да съхранява стойността. Внимание: <br />
+              трябва да приключите стойността с "L":
             </span>
             <br />
-            <span className={styles.keyword}>Example</span>
+            <span className={styles.keyword}>Пример</span>
             <br />
             <br />
             <span className={styles.keyword}>long</span> myNum = 15000000000L;
@@ -301,117 +295,179 @@ export default function DataTypes() {
             <span className={styles.builtin}>Console.WriteLine</span>(myNum);
             <br />
             <br />
-            <span className={styles.keyword}>// Floating Point Types</span>
+            <span className={styles.keyword}>// Типове с плаваща запетая</span>
             <br />
             <br />
             <span className={styles.string}>
-              You should use a floating point type whenever you need a number
-              with a decimal, such as 9.99 or 3.14515.
+              Винаги трябва да използвате тип с <br />
+              плаваща запетая, когато ви е необходимо <br />
+              число с десетична запетая,
+              <br />
+              като 9.99 или 3.14515.
             </span>
             <br />
-            <br />
-            <span className={styles.keyword}>
-              The float and double data types can store fractional numbers. Note
-              that you should end the value with an "F" for floats and "D" for
-              doubles:
-            </span>
-            <br />
-            <span className={styles.keyword}>Float Example</span>
-            <br />
-            <br />
-            <span className={styles.keyword}>float</span> myNum = 5.75F;
-            <br />
-            <span className={styles.builtin}>Console.WriteLine</span>(myNum);
-            <br />
-            <br />
-            <span className={styles.keyword}>Double Example</span>
-            <br />
-            <br />
-            <span className={styles.keyword}>double</span> myNum = 19.99D;
-            <br />
-            <span className={styles.builtin}>Console.WriteLine</span>(myNum);
-            <br />
-            <br />
-            <span className={styles.string}>Use float or double?</span>
+          </pre>
+        </div>
+
+        <Section
+          header={"Типове с плаваща запетая"}
+          content={`Int
+
+          Типът данни int може да съхранява цели числа от -2147483648 до 2147483647. Обикновено и в нашето ръководство, типът данни int е предпочитан, когато създаваме променливи с числова стойност.`}
+          color={"greenBG"}
+        />
+        <div className={styles.marginB}>
+          <div className={styles.varCode}>
+            <pre className={styles.codeText}>
+              <br />
+              <span className={styles.keyword}>
+                Типовете данни float и double могат да съхраняват
+                <br />
+                дробни числа. Забележете, че трябва да
+                <br />
+                приключите стойността с "F" за float и "D" за double:
+              </span>
+              <br />
+              <br />
+              <span className={styles.keyword}>Пример за float</span>
+              <br />
+              <br />
+              <span className={styles.keyword}>float</span> myNum = 5.75F;
+              <br />
+              <span className={styles.builtin}>Console.WriteLine</span>(myNum);
+              <br />
+              <br />
+              <span className={styles.keyword}>Пример за double</span>
+              <br />
+              <br />
+              <span className={styles.keyword}>double</span> myNum = 19.99D;
+              <br />
+              <span className={styles.builtin}>Console.WriteLine</span>(myNum);
+              <br />
+              <br />
+              <span className={styles.string}>
+                Кога да използвате float или double?
+              </span>
+              <br />
+              <br />
+              <span className={styles.string}>
+                Точността на стойността с плаваща запетая указва
+                <br />
+                колко цифри може да има след
+                <br />
+                десетичната запетая. Точността на float
+                <br />
+                е само шест или седем десетични цифри,
+                <br />
+                докато променливите double имат
+                <br />
+                точност от около 15 цифри. <br />
+                Затова е по-безопасно да използвате
+                <br />
+                double за повечето изчисления.
+              </span>
+              <br />
+              <span className={styles.keyword}>Научни числа</span>
+              <br />
+              <br />
+              <span className={styles.string}>
+                Числото с плаваща запетая може да бъде и
+                <br />
+                научно число с "е", което показва степента на 10:
+              </span>
+              <br />
+              <span className={styles.keyword}>Пример</span>
+              <br />
+              <br />
+              <span className={styles.keyword}>float</span> f1 = 35e3F;
+              <br />
+              <span className={styles.keyword}>double</span> d1 = 12E4D;
+              <br />
+              <span className={styles.builtin}>Console.WriteLine</span>(f1);
+              <br />
+              <span className={styles.builtin}>Console.WriteLine</span>(d1);
+              <br />
+            </pre>
+          </div>
+        </div>
+        <Section
+          header={"Булеви стойности"}
+          content={`Булевият тип данни се декларира с ключовата дума bool и може да приема само стойностите true или false:`}
+          color={"purpleBG"}
+        />
+        <div className={styles.marginB}>
+          <div className={styles.varCode}>
+            <pre className={styles.codeText}>
+              <br />
+              <span className={styles.keyword}>// Булеви стойности</span>
+              <br />
+              <br />
+              <span className={styles.string}>
+                Булевият тип данни се декларира
+                <br /> с ключовата дума bool и може
+                <br />
+                да приема само стойностите true или false:
+              </span>
+              <br />
+              <span className={styles.keyword}>Пример</span>
+              <br />
+              <br />
+              <span className={styles.keyword}>bool</span> isCSharpFun = true;
+              <br />
+              <span className={styles.keyword}>bool</span> isFishTasty = false;
+              <br />
+              <span className={styles.builtin}>Console.WriteLine</span>
+              (isCSharpFun);{" "}
+              <span className={styles.comment}>// Изход True</span>
+              <br />
+              <span className={styles.builtin}>Console.WriteLine</span>
+              (isFishTasty);{" "}
+              <span className={styles.comment}>// Изход False</span>
+              <br />
+              <br />
+              <span className={styles.keyword}>// Символи</span>
+              <br />
+              <br />
+              <span className={styles.string}>
+                Символният тип данни се използва за
+                <br />
+                съхранение на единичен
+                <br />
+                символ. Символът трябва да бъде обграден
+                <br /> с единични кавички, например 'A' или 'c':
+              </span>
+              <br />
+              <span className={styles.keyword}>Пример</span>
+              <br />
+              <br />
+              <span className={styles.keyword}>char</span> myGrade = 'B';
+              <br />
+              <span className={styles.builtin}>Console.WriteLine</span>
+              (myGrade);
+              <br />
+              <br />
+            </pre>
+          </div>
+        </div>
+        <Section
+          header={"Низове"}
+          content={`Низовият тип данни се използва за съхранение на поредица от символи (текст). Стойностите на низовете трябва да бъдат обградени с двойни кавички:`}
+          color={"purpleBG"}
+        />
+
+        <div className={styles.varCode}>
+          <pre className={styles.codeText}>
+            <span className={styles.keyword}>// Низове</span>
             <br />
             <br />
             <span className={styles.string}>
-              The precision of a floating point value indicates how many digits
-              the value can have after the decimal point. The precision of float
-              is only six or seven decimal digits, while double variables have a
-              precision of about 15 digits. Therefore, it is safer to use double
-              for most calculations.
+              Низовият тип данни се използва за съхранение
+              <br /> на поредица от символи (текст). <br />
+              Стойностите на низовете <br />
+              трябва да бъдат обградени с двойни кавички:
             </span>
             <br />
-            <span className={styles.keyword}>Scientific Numbers</span>
-            <br />
-            <br />
-            <span className={styles.string}>
-              A floating point number can also be a scientific number with an
-              "e" to indicate the power of 10:
-            </span>
-            <br />
-            <span className={styles.keyword}>Example</span>
-            <br />
-            <br />
-            <span className={styles.keyword}>float</span> f1 = 35e3F;
-            <br />
-            <span className={styles.keyword}>double</span> d1 = 12E4D;
-            <br />
-            <span className={styles.builtin}>Console.WriteLine</span>(f1);
-            <br />
-            <span className={styles.builtin}>Console.WriteLine</span>(d1);
-            <br />
-            <br />
-            <span className={styles.keyword}>// Booleans</span>
-            <br />
-            <br />
-            <span className={styles.string}>
-              A boolean data type is declared with the bool keyword and can only
-              take the values true or false:
-            </span>
-            <br />
-            <span className={styles.keyword}>Example</span>
-            <br />
-            <br />
-            <span className={styles.keyword}>bool</span> isCSharpFun = true;
-            <br />
-            <span className={styles.keyword}>bool</span> isFishTasty = false;
-            <br />
-            <span className={styles.builtin}>Console.WriteLine</span>
-            (isCSharpFun);{" "}
-            <span className={styles.comment}>// Outputs True</span>
-            <br />
-            <span className={styles.builtin}>Console.WriteLine</span>
-            (isFishTasty);{" "}
-            <span className={styles.comment}>// Outputs False</span>
-            <br />
-            <br />
-            <span className={styles.keyword}>// Characters</span>
-            <br />
-            <br />
-            <span className={styles.string}>
-              The char data type is used to store a single character. The
-              character must be surrounded by single quotes, like 'A' or 'c':
-            </span>
-            <br />
-            <span className={styles.keyword}>Example</span>
-            <br />
-            <br />
-            <span className={styles.keyword}>char</span> myGrade = 'B';
-            <br />
-            <span className={styles.builtin}>Console.WriteLine</span>(myGrade);
-            <br />
-            <br />
-            <span className={styles.keyword}>// Strings</span>
-            <br />
-            <br />
-            <span className={styles.string}>
-              The string data type is used to store a sequence of characters
-              (text). String values must be surrounded by double quotes:
-            </span>
-            <br />
-            <span className={styles.keyword}>Example</span>
+            <span className={styles.keyword}>Пример</span>
             <br />
             <br />
             <span className={styles.keyword}>string</span> greeting = "Hello
@@ -421,6 +477,7 @@ export default function DataTypes() {
           </pre>
         </div>
       </div>
+
       <div className={styles.marginB}></div>
 
       <CSharpDataTypes user={user} />

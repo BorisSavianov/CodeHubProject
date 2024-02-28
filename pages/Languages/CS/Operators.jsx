@@ -1,10 +1,12 @@
 // React Component for Operators
 import React from "react";
 import styles from "../../../styles/C#.module.css";
+import Navbar from "@/components/Navbar";
 
 const Operators = () => {
   return (
     <main>
+      <Navbar />
       <div
         className={`${styles.varContent} ${styles.marginB} ${styles.content}`}
       >
