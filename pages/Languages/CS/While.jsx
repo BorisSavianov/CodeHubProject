@@ -248,7 +248,10 @@ export default function PythonWhileLoop() {
         </p>
         <textarea
           className={styles.answer}
-          value={userAnswer || `# Напиши кода тук`}
+          value={
+            userAnswer ||
+            `using System;\n\nclass Program\n{\n    static void Main()\n    {\n        Console.WriteLine("Hello, World!");\n    }\n}`
+          }
           onChange={(e) => setUserAnswer(e.target.value)}
           onInput={(e) => {
             const sanitizedValue = e.target.value.replace(/\n/g, "");

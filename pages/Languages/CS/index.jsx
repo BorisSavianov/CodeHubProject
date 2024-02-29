@@ -21,11 +21,11 @@ export default function Wellcome() {
             Типове данни
           </Link>
         </p>
-        <p>
+        {/* <p>
           <Link href={`/Languages/CS/Operators`} className={styles.Item}>
             Логически Оператори
           </Link>
-        </p>
+        </p> */}
         <p>
           <Link href={`/Languages/CS/Arrays`} className={styles.Item}>
             Arrays

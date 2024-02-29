@@ -7,6 +7,7 @@ import ToastComponent from "@/components/Toast";
 
 // Импортиране на CSS модула
 import styles from "../../styles/Posts.module.css";
+import Navbar from "@/components/Navbar";
 
 // Компонент NewPostPage
 export default function NewPostPage() {
@@ -79,6 +80,7 @@ export default function NewPostPage() {
 
   return (
     <main>
+      <Navbar />
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1>Направи нов пост</h1>
         <div className={styles.formGroup}>
