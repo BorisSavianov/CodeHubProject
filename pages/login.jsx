@@ -37,41 +37,11 @@ function LoginForm() {
   const [error, setError] = useState("");
   const [user, setUser] = useState(null);
   const [showUsernameField, setShowUsernameField] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false); // Added loading state
-  const [emailFocused, setEmailFocused] = useState(false);
-  const [passwordFocused, setPasswordFocused] = useState(false);
 
   const formRef = useRef(null);
 
-  const scrollToTop = () => {
-    formRef.current.scrollTop = 0;
-  };
-
-  const handleInputFocus = (field) => {
-    if (field === "email") {
-      setEmailFocused(true);
-      setPasswordFocused(false);
-    } else if (field === "password") {
-      setEmailFocused(false);
-      setPasswordFocused(true);
-    }
-  };
-
-  // Add this function to handle input blur
-  const handleInputBlur = (field) => {
-    if (field === "email") {
-      setEmailFocused(false);
-    } else if (field === "password") {
-      setPasswordFocused(false);
-    }
-  };
-
   const router = useRouter();
-
-  const toggleLoginSignup = () => {
-    setIsLogin((prevIsLogin) => !prevIsLogin);
-  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -473,10 +443,6 @@ body {
         </div>
       </div>
     );
-  }
-
-  if (user && !showUsernameField) {
-    router.push("/");
   }
 }
 

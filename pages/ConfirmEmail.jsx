@@ -58,7 +58,7 @@ export default function ConfirmEmail() {
         );
         setTimeout(() => {
           router.push("/login");
-        }, 3000);
+        }, 7000);
       } else if (user && !user.emailVerified) {
         setError(
           "Имейлът е с предстоящо потвърждение. Моля, проверете вашия имейл."
